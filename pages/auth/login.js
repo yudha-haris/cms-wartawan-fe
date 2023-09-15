@@ -35,23 +35,25 @@ export default function Login() {
         console.log('Email:', username);
         console.log('Password:', password);
 
-        try {
+        router.push("/draf")
+
+        // try {
             
-            const response = await axios.post(
-                BE_URI.concat('/auth/login'), 
-                { 
-                    "email": "name@domain.com",
-                    "username": username, 
-                    "password": password 
-                });
+        //     const response = await axios.post(
+        //         BE_URI.concat('/auth/login'), 
+        //         { 
+        //             "email": "name@domain.com",
+        //             "username": username, 
+        //             "password": password 
+        //         });
 
-            console.log('Login response:', response.data);
-            router.push("/draf")
+        //     console.log('Login response:', response.data);
+        //     router.push("/draf")
 
-          } catch (error) {
-            console.error('Login error:', error);
-            console.log("ada error")
-        }
+        //   } catch (error) {
+        //     console.error('Login error:', error);
+        //     console.log("ada error")
+        // }
 
     };
 
