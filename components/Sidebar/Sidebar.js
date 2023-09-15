@@ -7,7 +7,7 @@ export default function Sidebar() {
 
     return (
         <main className="flex flex-col min-h-screen w-60 place-items-center py-24 px-2 bg-slate-300">
-            <div className="flex p-8">
+            <div className="flex p-8" onClick={() => router.push('/')}>
                 <h1 className="font-heading place-self-center text-2xl font-bold">AINGS</h1>
             </div>
             <div className="flex flex-col">
