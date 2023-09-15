@@ -33,11 +33,13 @@ export default function Register() {
         console.log('Email:', username);
         console.log('Password:', password);
 
-        if (!(email !== "" && username !== "" && password !== "")) {
-            console.log("isi dulu")
-        } else {
-            router.push("/draf");
-        }
+        // if (!(email !== "" && username !== "" && password !== "")) {
+        //     console.log("isi dulu")
+        // } else {
+        //     router.push("/draf");
+        // }
+
+        router.push("/overview")
 
     };
 

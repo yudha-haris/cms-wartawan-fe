@@ -1,38 +1,44 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Card from '@/components/Card/Card';
-import Sidebar from '@/components/Sidebar/Sidebar';
-import ListItem from '@/components/ListItem/ListItem';
+import React, { useState } from 'react';
+import InputText from "@/components/Inputs/Text";
+import Link from 'next/link';
+import axios from 'axios';
+import { headers } from '@/next.config';
+import BackgroundImage from '@/components/BackgroundImage/BackgroundImage';
+import { useRouter } from 'next/navigation'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const JUDUL_PLACEHOLDER = "Bantu Warga Terdampak Kekeringan, PMI Depok Distribusikan 15.000 Liter Air Bersih";
-  const TIME_PLACEHOLDER = "09.00 12/09/2023";
+    const router = useRouter()
 
-  const card_placeholder = "konten lorem ipsum"; 
-    // = "Konten lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet";
+    const handleRegister = async () => {
+      router.push("/auth/register")
+    };
 
-  return (
-    <main className="flex flex-row min-h-screen max-w-full">
+    const handleLogin = async () => {
+      router.push("/auth/login")  
+    };
+    
+    return (
+        <main className='flex justify-center items-center'>
 
-      <Sidebar />
+            <BackgroundImage image_url="https://source.unsplash.com/WYd_PkCa1BY" />
 
-      <div className='flex flex-col self-stretch items-start content-start p-20 max-w-fit '>
-        <h1 className='font-heading text-5xl font-bold pb-8 self-stretch'>Daftar Draf Berita</h1>  
-        <div className='flex flex-row gap-8'>
-          <div className='flex flex-col self-stretch items-start content-start'>
-            <ListItem title={JUDUL_PLACEHOLDER} time={TIME_PLACEHOLDER} />
-            <ListItem title={JUDUL_PLACEHOLDER} time={TIME_PLACEHOLDER} />
+                <div className="flex flex-col min-h-screen w-96 items-center place-items-center p-20 gap-y-4">
+                    
+                    <div className='flex flex-col place-items-center pb-8'>
+                        <h1 className="font-heading place-self-center text-6xl font-bold">AINGS</h1>
+                        <p className='font-body text-lg place-self-center text-center'>Artificial Intelligence News Generator System</p>
+                    </div>
 
-          </div>
-          <div className='flex flex-col items-center w-42 h-64 bg-slate-200 py-4 px-12'>
-            <h1 className='font-heading text-xl'>Notifikasi</h1>
-          </div>
-        </div>
-    </div>
+                    <button className="bg-blue-200 py-2 px-4 rounded-lg shadow-sm self-stretch"
+                            onClick={handleRegister}>Daftarkan Akun</button>
 
-    </main>
-  )
+                    <button className="bg-blue-200 py-2 px-4 rounded-lg shadow-sm self-stretch"
+                            onClick={handleLogin}>Masuk dengan Akun yang Sudah Ada</button>
+
+                </div>
+            
+        </main>
+    );
 }

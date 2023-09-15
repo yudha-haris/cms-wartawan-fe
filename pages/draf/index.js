@@ -2,7 +2,7 @@ import Editor from "@/components/Editor/Editor";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import ListItem from "@/components/ListItem/ListItem";
 
-export default function CreateDrafBerita() {
+export default function DaftarDrafBerita() {
 
     const JUDUL_PLACEHOLDER = "Bantu Warga Terdampak Kekeringan, PMI Depok Distribusikan 15.000 Liter Air Bersih";
     const TIME_PLACEHOLDER = "09.00 12/09/2023"
