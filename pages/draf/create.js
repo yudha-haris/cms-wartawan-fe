@@ -4,13 +4,8 @@ import Textbox from "@/components/Inputs/Textbox";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
 export default function CreateDrafBerita() {
-
-    const [title, setTitle] = useState('');
+    
     const [prompt, setPrompt] = useState('');
-
-    const handleTitleChange = (newValue) => {
-        setTitle(newValue);
-    };
 
     const handlePromptChange = (newValue) => {
         setPrompt(newValue);
@@ -27,11 +22,6 @@ export default function CreateDrafBerita() {
                 </div>
 
                 <div className="flex flex-col items-end self-stretch gap-3">
-                    <InputText 
-                        id="title" 
-                        type="text" 
-                        placeholder="Masukkan judul berita" 
-                        onInputChange={handleTitleChange} />
                     <Textbox 
                         id="prompt" 
                         placeholder="Masukkan prompt untuk berita yang akan dibuat"
