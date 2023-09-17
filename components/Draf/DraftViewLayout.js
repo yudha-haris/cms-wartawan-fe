@@ -14,7 +14,7 @@ export default function DraftViewLayout({title, content}) {
 
     return (
         <main className='bg-blue-50 self-stretch'>
-            <div className="flex flex-col items-start min-h-screen py-16 px-52 gap-8">
+            <div className="flex flex-col items-start min-h-screen py-16 px-24 gap-8">
                 <div className="flex flex-row items-start gap-4">
                     {/* <button className="font-body self-stretch px-4 border-2 border-blue-400 rounded-lg hover:bg-blue-100" 
                         onClick={() => router.back()}>Kembali</button> */}
