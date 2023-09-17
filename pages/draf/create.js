@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Textbox from "@/components/Inputs/Textbox";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import { useRouter } from 'next/navigation'
 
 export default function CreateDrafBerita() {
+
+    const router = useRouter()
     
     const [prompt, setPrompt] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isDoneGenerate, setIsDoneGenerate] = useState(false);
 
+    const PROMPT_PREPEND = "Buatkan berita mengenai ";
+
     const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
     // const BE_URI = "http://localhost:9000";
 
-    const JWT_TOKEN = localStorage.getItem("jwtToken");
+    useEffect( () => {
+        const JWT_TOKEN = localStorage.getItem("jwtToken");
+    }, []);
 
     const handlePromptChange = (newValue) => {
         setPrompt(newValue);
@@ -37,7 +44,7 @@ export default function CreateDrafBerita() {
             const response = await axios.post(
                 BE_URI.concat('/v1/draft/create'), 
                 { 
-                    "prompt": prompt, 
+                    "prompt": PROMPT_PREPEND.concat(prompt), 
                 }, 
                 { headers} 
                 ).then( (response) => {
