@@ -23,9 +23,6 @@ export default function Overview() {
             <h1 className='font-heading text-xl pt-6 font-bold px-8 self-stretch text-blue-600'>Berita Terbaru</h1>
             <div className='flex flex-col py-2 self-stretch items-start content-start  '>
               <ListItem title={JUDUL_PLACEHOLDER} time={TIME_PLACEHOLDER} onClick={() => router.push('/draf/view')} />
-              <ListItem title={JUDUL_PLACEHOLDER} time={TIME_PLACEHOLDER} />
-              <ListItem title={JUDUL_PLACEHOLDER} time={TIME_PLACEHOLDER} />
-              <ListItem title={JUDUL_PLACEHOLDER} time={TIME_PLACEHOLDER} />
             </div>
           </div>
           
