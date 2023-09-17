@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import InputText from "@/components/Inputs/Text";
-import Link from 'next/link';
-import axios from 'axios';
-import { headers } from '@/next.config';
 import BackgroundImage from '@/components/BackgroundImage/BackgroundImage';
 import { useRouter } from 'next/navigation'
 
@@ -20,13 +16,14 @@ export default function Home() {
     };
     
     return (
-        <main className='flex justify-center items-center'>
+        <main className='flex justify-center items-center min-h-screen w-[640] bg-blue-50'>
 
             <BackgroundImage image_url="https://source.unsplash.com/WYd_PkCa1BY" />
 
-                <div className="flex flex-col min-h-screen w-96 items-center place-items-center p-20 gap-y-4">
+                <div className="flex flex-col w-96 items-center place-items-center px-20 pt-12 pb-20 gap-y-4 
+                    rounded-xl bg-white border-2 border-blue-400">
                     
-                    <div className='flex flex-col place-items-center pb-8'>
+                    <div className='flex flex-col place-items-center pb-6'>
                         <h1 className="font-heading place-self-center text-6xl font-bold">AINGS</h1>
                         <p className='font-body text-lg place-self-center text-center'>Artificial Intelligence News Generator System</p>
                     </div>
