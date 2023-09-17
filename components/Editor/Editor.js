@@ -1,6 +1,5 @@
 // "use client"
-// import { MDXEditor, headingsPlugin } from "@mdxeditor/editor"
-// const { MDXEditor , codeBlockPlugin, headingsPlugin, listsPlugin, linkPlugin, quotePlugin, markdownShortcutPlugin, useCodeBlockEditorContext } = await import('@mdxeditor/editor')
+// import { MDXEditor } from "@mdxeditor/editor/MDXEditor";
 
 
 /**
@@ -8,21 +7,24 @@
 * proxying the ref is necessary. Next.js dynamically imported components don't support refs.
 */
 
-// const Editor = ({ markdown, editorRef }) => {
+
+
+// const Editor = ({ className, markdown }) => {
 //   return (
 //     <MDXEditor
-//         onChange={console.log}
-//         markdown={'Hello world!'}
-//         plugins={[
-//             codeBlockPlugin({ codeBlockEditorDescriptors: [PlainTextCodeEditorDescriptor] }),
-//             headingsPlugin(),
-//             listsPlugin(),
-//             linkPlugin(),
-//             quotePlugin(),
-//             markdownShortcutPlugin()
-//         ]}
+//         className={className}
+//         // onChange={onChange}
+//         markdown={markdown}
+//         // plugins={[
+//         //     // codeBlockPlugin({ codeBlockEditorDescriptors: [PlainTextCodeEditorDescriptor] }),
+//         //     headingsPlugin(),
+//         //     // listsPlugin(),
+//         //     // linkPlugin(),
+//         //     // quotePlugin(),
+//         //     // markdownShortcutPlugin()
+//         // ]}
 //     />
 //   )
-// }
+// };
 
-// export default Editor
+// export default Editor;
