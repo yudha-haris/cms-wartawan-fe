@@ -15,12 +15,14 @@ export default function CreateDrafBerita() {
     const PROMPT_PREPEND = "Buatkan berita mengenai ";
 
     const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
-    // const BE_URI = "http://localhost:9000";
 
-    let JWT_TOKEN = "";
+    const [JWT_TOKEN, setJWT_TOKEN] = useState('');
 
     useEffect( () => {
-        JWT_TOKEN = localStorage.getItem("jwtToken");
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+            setJWT_TOKEN(token);
+        }
     }, []);
 
     const handlePromptChange = (newValue) => {

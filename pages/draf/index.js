@@ -20,11 +20,13 @@ export default function DaftarDrafBerita() {
     const router = useRouter()
 
     const [drafts, setDrafts] = useState([]);
-
-    let JWT_TOKEN = "";
+    const [JWT_TOKEN, setJWT_TOKEN] = useState('');
 
     useEffect( () => {
-        JWT_TOKEN = localStorage.getItem("jwtToken");
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+            setJWT_TOKEN(token);
+        }
     }, []);
 
     return (
