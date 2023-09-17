@@ -21,7 +21,7 @@ export default function DaftarDrafBerita() {
 
     const [drafts, setDrafts] = useState([]);
 
-    const JWT_TOKEN = "";
+    let JWT_TOKEN = "";
 
     useEffect( () => {
         JWT_TOKEN = localStorage.getItem("jwtToken");
