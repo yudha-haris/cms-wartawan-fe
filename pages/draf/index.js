@@ -11,12 +11,6 @@ export default function DaftarDrafBerita() {
 
     const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
 
-    const headers = {
-        'Authorization': `Bearer ${JWT_TOKEN}`,
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': BE_URI,
-      };
-
     const router = useRouter()
 
     const [drafts, setDrafts] = useState([]);
@@ -28,6 +22,12 @@ export default function DaftarDrafBerita() {
             setJWT_TOKEN(token);
         }
     }, []);
+
+    const headers = {
+        'Authorization': `Bearer ${JWT_TOKEN}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': BE_URI,
+      };
 
     return (
         <div className="flex flex-row min-h-screen bg-blue-50">
