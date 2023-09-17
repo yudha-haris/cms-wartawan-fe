@@ -3,7 +3,7 @@ import axios from 'axios';
 import Textbox from "@/components/Inputs/Textbox";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { useRouter } from 'next/navigation'
-import DraftViewLayout from "@/components/Draf/DraftViewLayout";
+import DraftViewAfterCreateLayout from '@/components/Draf/DraftViewAfterCreateLayout';
 
 export default function CreateDrafBerita() {
 
@@ -58,10 +58,6 @@ export default function CreateDrafBerita() {
                     setContent(response.data.content);
                 });
 
-                // setTimeout(() => {
-                //     router.push(`/draf/${}`);
-                //   }, 2000);
-
           } catch (error) {
             console.error('Error:', error);
             console.log("ada error")
@@ -106,7 +102,7 @@ export default function CreateDrafBerita() {
                                     
                                 : <button className="bg-blue-300 py-2 px-4 rounded-lg font-body text-md"
                                     onClick={handleGenerateBerita}>Buat Berita</button>)
-                        } {isDoneGenerate ? (<DraftViewLayout title={title} content={content} />) : <p></p>}
+                        } {isDoneGenerate ? (<DraftViewAfterCreateLayout title={title} content={content} />) : <p></p>}
 
                     </div>
 
