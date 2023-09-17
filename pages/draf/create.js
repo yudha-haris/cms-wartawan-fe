@@ -3,6 +3,7 @@ import axios from 'axios';
 import Textbox from "@/components/Inputs/Textbox";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { useRouter } from 'next/navigation'
+import DraftViewLayout from "@/components/Draf/DraftViewLayout";
 
 export default function CreateDrafBerita() {
 
@@ -17,6 +18,8 @@ export default function CreateDrafBerita() {
     const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
 
     const [JWT_TOKEN, setJWT_TOKEN] = useState('');
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
     useEffect( () => {
         const token = localStorage.getItem('jwtToken');
@@ -33,10 +36,6 @@ export default function CreateDrafBerita() {
         'Authorization': `Bearer ${JWT_TOKEN}`,
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': BE_URI,
-      };
-    
-      const options = {
-        headers,
       };
 
     const handleGenerateBerita = async () => {
@@ -55,11 +54,13 @@ export default function CreateDrafBerita() {
                     console.log('API response:', response.data);
                     setIsLoading(false);
                     setIsDoneGenerate(true);
+                    setTitle(response.data.title);
+                    setContent(response.data.content);
                 });
 
-                setTimeout(() => {
-                    router.push('/overview');
-                  }, 2000);
+                // setTimeout(() => {
+                //     router.push(`/draf/${}`);
+                //   }, 2000);
 
           } catch (error) {
             console.error('Error:', error);
@@ -80,7 +81,7 @@ export default function CreateDrafBerita() {
                         <br></br>Cukup masukkan deskripsi berita yang ingin dibuat pada kolom berikut.</p>
                     </div>
 
-                    <div className="flex flex-col items-end self-stretch gap-3">
+                    <div className="flex flex-col items-center self-stretch gap-3">
                         <Textbox 
                             id="prompt" 
                             placeholder="Masukkan deskripsi berita yang ingin dibuat"
@@ -101,9 +102,11 @@ export default function CreateDrafBerita() {
                             :  (isDoneGenerate ? 
                                     <button disabled type='button' 
                                         className='bg-green-400 py-2 px-4 rounded-lg font-body text-md'>Generate Done!</button> 
+                                    
+                                    
                                 : <button className="bg-blue-300 py-2 px-4 rounded-lg font-body text-md"
                                     onClick={handleGenerateBerita}>Buat Berita</button>)
-                        }
+                        } {isDoneGenerate ? (<DraftViewLayout title={title} content={content} />) : <p></p>}
 
                     </div>
 
