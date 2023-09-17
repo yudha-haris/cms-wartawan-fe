@@ -17,8 +17,10 @@ export default function CreateDrafBerita() {
     const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
     // const BE_URI = "http://localhost:9000";
 
+    const JWT_TOKEN = "";
+
     useEffect( () => {
-        const JWT_TOKEN = localStorage.getItem("jwtToken");
+        JWT_TOKEN = localStorage.getItem("jwtToken");
     }, []);
 
     const handlePromptChange = (newValue) => {
