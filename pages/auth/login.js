@@ -14,7 +14,7 @@ export default function Login() {
 
     const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('admin@admin.com');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -77,7 +77,7 @@ export default function Login() {
                     <h1 className="font-heading place-self-center text-2xl font-bold pb-4">Masuk</h1>
                     
                     <div className='flex flex-col place-items-center gap-y-2 justify-stretch'>
-                        <InputText id="email" type="email" placeholder="email@domain.com" onInputChange={handleEmailChange} />
+                        {/* <InputText id="email" type="email" placeholder="email@domain.com" onInputChange={handleEmailChange} /> */}
                         <InputText id="username" type="text" placeholder="Username" onInputChange={handleUsernameChange} />
                         <InputText id="password" type="password" placeholder="Password" onInputChange={handlePasswordChange} />
                     </div>

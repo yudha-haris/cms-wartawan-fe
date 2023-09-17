@@ -32,18 +32,14 @@ export default function Register() {
 
     const handleRegister = async () => {
 
-        console.log('Email:', email);
-        console.log('Email:', username);
-        console.log('Password:', password);
-
         if (!(email !== "" && username !== "" && password !== "")) {
             setIsFailed(true);
         } else {
             setIsFailed(false);
             setIsSuccess(true);
             setTimeout(() => {
-                router.push('/overview');
-              }, 2000);
+                router.push('/auth/login');
+              }, 3000);
         }
 
     };
@@ -82,7 +78,7 @@ export default function Register() {
                         </div>
                     : ( isSuccess ? 
                         <div className='bg-green-300 px-4 py-2 rounded-lg'>
-                            <p className='font-body text-lg'>Berhasil mendaftarkan akun!</p>
+                            <p className='font-body text-lg'>Berhasil mendaftarkan akun! Silahkan Masuk</p>
                         </div>
                     : <div></div> ) }
 
