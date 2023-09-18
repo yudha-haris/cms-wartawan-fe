@@ -7,8 +7,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundColor: {
-
+      colors: {
+        black: '#000000', // Set all text colors to black
       },
       fontFamily: {
         heading: ['Poppins', 'sans'], 
