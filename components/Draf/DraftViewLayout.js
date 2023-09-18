@@ -16,7 +16,7 @@ export default function DraftViewLayout( {title, content} ) {
                 <div className="flex flex-row items-start gap-4">
                     <button className="font-body self-stretch px-4 border-2 border-blue-400 rounded-lg hover:bg-blue-100" 
                         onClick={() => router.back()}>Kembali</button>
-                    <h1 className="font-heading text-2xl font-bold">
+                    <h1 className="font-heading text-2xl font-bold text-black">
                         {/* {DRAFT_TITLE} */}
                         {title}
                     </h1>
@@ -24,7 +24,7 @@ export default function DraftViewLayout( {title, content} ) {
                 <div className="flex flex-col h-[480px] py-8 px-12 items-start self-stretch 
                     bg-white border-2 border-blue-400 rounded-xl gap-y-2 overflow-y-auto">
                     {DRAFT_CONTENT_EDITED.map((line, index) => (
-                        <p key={index} className="font-body text-lg"> {line} </p>
+                        <p key={index} className="font-body text-lg text-black"> {line} </p>
                     ))}
                 </div>
                 {/* <div className='flex flex-row justify-end gap-3'>

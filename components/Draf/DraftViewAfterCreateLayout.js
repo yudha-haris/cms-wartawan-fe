@@ -12,7 +12,7 @@ export default function DraftViewAfterCreateLayout({title, content}) {
                 <div className="flex flex-row items-start gap-4">
                     {/* <button className="font-body self-stretch px-4 border-2 border-blue-400 rounded-lg hover:bg-blue-100" 
                         onClick={() => router.back()}>Kembali</button> */}
-                    <h1 className="font-heading text-2xl font-bold">
+                    <h1 className="font-heading text-2xl font-bold text-black">
                         {title}
                     </h1>
                 </div>
@@ -21,7 +21,7 @@ export default function DraftViewAfterCreateLayout({title, content}) {
                     {/* {DRAFT_CONTENT_EDITED.map((line, index) => (
                         // <p key={index}>{line}</p>
                         <p key={index} className="font-body text-lg"> {line} </p>
-                    ))} */} <p className="font-body text-lg">{content}</p>
+                    ))} */} <p className="font-body text-lg text-black">{content}</p>
                 </div>
             </div>
         </main>

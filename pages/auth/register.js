@@ -53,11 +53,11 @@ export default function Register() {
                 <div className="flex flex-col items-center place-items-center p-20 gap-y-4 rounded-xl bg-white border-2 border-blue-400">
 
                     <div className='flex flex-col place-items-center pb-4'>
-                        <h1 className="font-heading place-self-center text-6xl font-bold">AINGS</h1>
-                        <p className='font-body text-lg place-self-center text-center'>Artificial Intelligence News Generator System</p>
+                        <h1 className="font-heading place-self-center text-6xl font-bold text-black">AINGS</h1>
+                        <p className='font-body text-lg place-self-center text-center text-black'>Artificial Intelligence News Generator System</p>
                     </div>
 
-                    <h1 className="font-heading place-self-center text-2xl font-bold pb-4">Daftarkan Akun</h1>
+                    <h1 className="font-heading place-self-center text-2xl font-bold pb-4 text-black">Daftarkan Akun</h1>
                     
                     <div className='flex flex-col place-items-center gap-y-2 justify-stretch'>
                         <InputText id="email" type="email" placeholder="email@domain.com" onInputChange={handleEmailChange} />
@@ -65,20 +65,20 @@ export default function Register() {
                         <InputText id="password" type="password" placeholder="Password" onInputChange={handlePasswordChange} />
                     </div>
 
-                    <button className="bg-blue-200 py-2 px-4 rounded-lg shadow-sm"
+                    <button className="bg-blue-200 py-2 px-4 rounded-lg shadow-sm text-black"
                             onClick={handleRegister}>Daftar</button>
 
-                    <p className='font-body'>
+                    <p className='font-body text-black'>
                         Sudah punya akun? <Link href="/auth/login"><span className='text-blue-500 underline-offset-1'>Masuk</span></Link>.
                     </p>
 
                     { isFailed ? 
                         <div className='bg-red-300 px-4 py-2 rounded-lg'>
-                            <p className='font-body text-lg text-center'>Isi semua kolom terlebih dahulu!</p>
+                            <p className='font-body text-lg text-center text-black'>Isi semua kolom terlebih dahulu!</p>
                         </div>
                     : ( isSuccess ? 
                         <div className='bg-green-300 px-4 py-2 rounded-lg'>
-                            <p className='font-body text-lg'>Berhasil mendaftarkan akun! Silahkan Masuk</p>
+                            <p className='font-body text-lg text-black'>Berhasil mendaftarkan akun! Silahkan Masuk</p>
                         </div>
                     : <div></div> ) }
 
