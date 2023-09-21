@@ -6,7 +6,7 @@ export default function Sidebar() {
     const router = useRouter()
 
     return (
-        <main className="flex flex-col min-h-screen w-68 items-center py-24 px-8 bg-blue-900">
+        <div className="flex flex-col min-h-screen w-68 items-center py-24 px-8 bg-blue-900">
             <div className="flex p-8" onClick={() => router.push('/overview')}>
                 <h1 className="font-heading place-self-center text-4xl font-bold text-white">AINGS</h1>
             </div>
@@ -21,6 +21,6 @@ export default function Sidebar() {
                     <button className="font-body text-lg py-2 px-3 self-stretch text-white">Buat Draf Berita</button>
                 </div>
             </div>
-        </main>
+        </div>
     );
 }

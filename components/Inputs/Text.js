@@ -6,12 +6,11 @@ export default function InputText({id, type, placeholder, onInputChange}) {
     const handleInputChange = (e) => {
         const newValue = e.target.value;
         setInputValue(newValue);
-        onInputChange(newValue); // Pass the new value to the parent component
+        onInputChange(newValue);
     };
     
     return (
-        <main className="flex flex-col content-start self-stretch place-items-start">
-            
+        <div className="flex flex-col content-start self-stretch place-items-start">
             <input
                 id={id}
                 type={type}
@@ -22,9 +21,7 @@ export default function InputText({id, type, placeholder, onInputChange}) {
                 placeholder={placeholder}
                 value={inputValue}
                 onChange={handleInputChange}>
-
             </input>  
-
-        </main>
+        </div>
     );
 }
