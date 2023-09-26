@@ -38,6 +38,10 @@ export default function DraftCreateLayout() {
         'Access-Control-Allow-Origin': BE_URI,
       };
 
+    const handleStartOver = async () => {
+        setIsDoneGenerate(false);
+    }
+
     const handleGenerateBerita = async () => {
 
         setIsLoading(true);
@@ -96,8 +100,17 @@ export default function DraftCreateLayout() {
                                 Sistem sedang Generate Berita...
                             </button>
                             :  (isDoneGenerate ? 
-                                <button disabled type='button' 
-                                    className='bg-green-400 py-2 px-4 rounded-lg font-body text-md text-black'>Generate Done!</button>
+                                <div className='flex flex-row items-center'>
+                                    <button disabled type='button' 
+                                        className='bg-green-400 py-2 px-4 rounded-lg font-body text-md text-black'>Generate Done!</button>
+                                    <button type='button' 
+                                        className='bg-blue-300 py-2 px-4 rounded-lg font-body text-md text-black'
+                                        onClick={handleGenerateBerita}>Muat Ulang</button> 
+                                    <button type='button' 
+                                        className='bg-blue-300 py-2 px-4 rounded-lg font-body text-md text-black'
+                                        onClick={handleStartOver}>Buat Ulang</button>
+                                </div>
+                                    
                                 : <button className="bg-blue-300 py-2 px-4 rounded-lg font-body text-md text-black"
                                     onClick={handleGenerateBerita}>Buat Draf Berita</button>)
                         } {isDoneGenerate ? (<DraftViewAfterCreateLayout title={title} content={content} />) : <p></p>}
