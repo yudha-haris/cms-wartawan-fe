@@ -1,30 +1,33 @@
-// "use client"
-// import { MDXEditor } from "@mdxeditor/editor/MDXEditor";
+import React, { useEffect, useRef } from "react";
+import { MDXEditor } from "@mdxeditor/editor/MDXEditor";
+import { UndoRedo } from "@mdxeditor/editor/plugins/toolbar/components/UndoRedo";
+import { BoldItalicUnderlineToggles } from "@mdxeditor/editor/plugins/toolbar/components/BoldItalicUnderlineToggles";
+import { toolbarPlugin } from "@mdxeditor/editor/plugins/toolbar";
+import "@mdxeditor/editor/style.css";
 
+const Editor = ({ contents, onChange, className }) => {
+  const ref = useRef();
 
-/**
-* Extend this Component further with the necessary plugins or props you need.
-* proxying the ref is necessary. Next.js dynamically imported components don't support refs.
-*/
+  return (
+    <MDXEditor
+      className={className}
+      markdown={contents}
+      plugins={
+        onChange && [
+          toolbarPlugin({
+            toolbarContents: () => (
+              <div className="flex">
+                <UndoRedo />
+                <BoldItalicUnderlineToggles />
+              </div>
+            ),
+          }),
+        ]
+      }
+      ref={ref}
+      onChange={onChange}
+    />
+  );
+};
 
-
-
-// const Editor = ({ className, markdown }) => {
-//   return (
-//     <MDXEditor
-//         className={className}
-//         // onChange={onChange}
-//         markdown={markdown}
-//         // plugins={[
-//         //     // codeBlockPlugin({ codeBlockEditorDescriptors: [PlainTextCodeEditorDescriptor] }),
-//         //     headingsPlugin(),
-//         //     // listsPlugin(),
-//         //     // linkPlugin(),
-//         //     // quotePlugin(),
-//         //     // markdownShortcutPlugin()
-//         // ]}
-//     />
-//   )
-// };
-
-// export default Editor;
+export default Editor;
