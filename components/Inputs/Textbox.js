@@ -15,8 +15,8 @@ export default function Textbox({id, placeholder, onInputChange}) {
             <textarea 
                 id={id}
                 className="
-                    self-stretch
-                    block p-3 w-full text-lg text-gray-900 bg-gray-50 rounded-md border border-gray-300 
+                    self-stretch w-full
+                    block p-3 text-lg text-gray-900 bg-gray-50 rounded-md border border-gray-300 
                     focus:border-2 focus:border-blue-500"
                 placeholder={placeholder}
                 value={inputValue}
