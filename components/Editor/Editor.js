@@ -5,7 +5,7 @@ import { BoldItalicUnderlineToggles } from "@mdxeditor/editor/plugins/toolbar/co
 import { toolbarPlugin } from "@mdxeditor/editor/plugins/toolbar";
 import "@mdxeditor/editor/style.css";
 
-const Editor = ({ contents, onChange, className }) => {
+const Editor = ({ contents, onChange = "", className }) => {
   const ref = useRef();
 
   return (
@@ -16,7 +16,7 @@ const Editor = ({ contents, onChange, className }) => {
         onChange && [
           toolbarPlugin({
             toolbarContents: () => (
-              <div className="flex">
+              <div className="flex flex-row contents-start">
                 <UndoRedo />
                 <BoldItalicUnderlineToggles />
               </div>
@@ -25,7 +25,7 @@ const Editor = ({ contents, onChange, className }) => {
         ]
       }
       ref={ref}
-      onChange={onChange}
+      // onChange={onChange}
     />
   );
 };
