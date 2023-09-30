@@ -1,7 +1,11 @@
+import { useDispatch } from "react-redux";
 import classes from "./styles.module.css";
 import { useRouter } from 'next/navigation'
+import { logout } from "@/states/auth/action";
 
 export default function Sidebar() {
+
+    const dispatch = useDispatch();
 
     const router = useRouter()
 
@@ -19,6 +23,9 @@ export default function Sidebar() {
                 </div>
                 <div className="self-stretch hover:bg-blue-950 hover:cursor-pointer" onClick={() => router.push('/draf/create')}>
                     <p className="font-body text-lg py-2 px-3 self-stretch text-white">Buat Draf Berita</p>
+                </div>
+                <div className="self-stretch hover:bg-blue-950 hover:cursor-pointer" onClick={() => {dispatch(logout())} }>
+                    <p className="font-body text-lg py-2 px-3 self-stretch text-white">Log out</p>
                 </div>
             </div>
         </div>

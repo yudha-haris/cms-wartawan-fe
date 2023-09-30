@@ -3,11 +3,14 @@ import Sidebar from '@/components/Sidebar/Sidebar';
 import ListItem from '@/components/ListItem/ListItem';
 import { useRouter } from 'next/navigation'
 import axios from 'axios';
+import useRequireAuth from '@/hooks/useRequireAuth';
 
 export default function Overview() {
 
   const JUDUL_PLACEHOLDER = "Manchester United Menghancurkan Arsenal dengan Skor 8-2 di Tahun 2011";
   const TIME_PLACEHOLDER = "09.00 12/09/2023";
+
+  const auth = useRequireAuth();
 
   const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
   const router = useRouter();
@@ -51,6 +54,10 @@ export default function Overview() {
         router.push(`/draf/${id}`)
     };
 
+    if (!auth) {
+      return (<div></div>);
+    }
+
   return (
     <main className="flex flex-row min-h-screen w-full bg-blue-50">
 
@@ -61,7 +68,7 @@ export default function Overview() {
         <div className='flex flex-row self-stretch gap-8'>
 
           <div className='flex flex-col w-2/3 rounded-xl bg-white border-2 border-blue-400'>
-            <h1 className='font-heading text-xl pt-6 font-bold px-8 self-stretch text-blue-600 text-black'>Berita Terbaru</h1>
+            <h1 className='font-heading text-xl pt-6 font-bold px-8 self-stretch text-blue-600'>Draf Berita Terbaru</h1>
             <div className='flex flex-col py-2 self-stretch items-start content-start'>
               {/* <ListItem title={JUDUL_PLACEHOLDER} time={TIME_PLACEHOLDER} onClick={() => router.push('/draf/view')} /> */}
               {drafts.map((draft) => (

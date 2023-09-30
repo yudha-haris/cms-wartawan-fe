@@ -4,83 +4,39 @@ import InputText from "@/components/Inputs/Text";
 import Link from 'next/link';
 import axios from 'axios';
 import BackgroundImage from '@/components/BackgroundImage/BackgroundImage';
+import { useDispatch } from 'react-redux';
+import useInput from '@/hooks/useInput';
+import { login } from '@/states/auth/action';
 
 export default function LoginLayout() {
 
     const router = useRouter()
 
-    // const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
     const BE_URI = "http://localhost:9000";
 
-    const [email, setEmail] = useState('')
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+    const [email, setEmail] = useInput('')
+    const [username, setUsername] = useInput('');
+    const [password, setPassword] = useInput('');
 
-    const [isUseUsername, setIsUseUsername] = useState(true)
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [isFailed, setIsFailed] = useState(false);
+    const [isUseUsername, setIsUseUsername] = useState(true);
 
-    let request = {};
-
-    const handleEmailChange = (newValue) => {
-        setEmail(newValue);
-      };
-
-    const handleUsernameChange = (newValue) => {
-        setUsername(newValue);
-    };
-    
-    const handlePasswordChange = (newValue) => {
-        setPassword(newValue);
+    const handleUseUsername = (value) => {
+        setIsUseUsername(value);
     };
 
-    const handleUseEmail = () => {
-        setIsUseUsername(false);
-    };
-
-    const handleUseUsername = () => {
-        setIsUseUsername(true);
-    };
+    const dispatch = useDispatch();
 
     const handleLogin = async () => {
         if (isUseUsername) {
-            request = {
-                "username": username, 
-                "password": password 
-            };
+            dispatch(login({username, password, 
+                onSuccess: () => {
+                    router.push("/overview");
+                }}));
         } else {
-            request = {
-                "email": email, 
-                "password": password 
-            }
-        }
-        try {
-            const response = await axios.post(
-                `${BE_URI}/auth/login`, 
-                request
-                ).then( (response) => {
-                    // console.log(response.data);
-                    if (response.data.token) {
-                        localStorage.setItem('jwtToken', response.data.token);
-                        setIsSuccess(true);
-
-                        setTimeout(() => {
-                            router.push('/overview');
-                          }, 2000);
-  
-                    } else {
-                        // setMessage(response.data.message);
-                        setMessage("Kombinasi username dan password salah!");
-                        setIsFailed(true);
-                    }
-                });
-            
-
-          } catch (error) {
-            console.log("ada error");
-            console.error('Login error:', error);
-            setIsFailed(true);
+            dispatch(login({email, password, 
+                onSuccess: () => {
+                    router.push("/overview");
+                }}));
         }
     };
 
@@ -103,16 +59,16 @@ export default function LoginLayout() {
                         { isUseUsername
                             ? <>
                                 <p className='font-body text-black'>
-                                    Coba masuk dengan <span className='text-blue-500 hover:cursor-pointer' onClick={handleUseEmail}>email</span></p>
-                                <InputText id="username" type="text" placeholder="Username" onInputChange={handleUsernameChange} />
+                                    Coba masuk dengan <span className='text-blue-500 hover:cursor-pointer' onClick={() => {handleUseUsername(false)}}>email</span></p>
+                                <InputText id="username" type="text" placeholder="Username" onInputChange={setUsername} />
                             </>
                             : <>
                                 <p className='font-body text-black'>
-                                    Coba masuk dengan <span className='text-blue-500 hover:cursor-pointer' onClick={handleUseUsername}>username</span></p>
-                                <InputText id="email" type="text" placeholder="Email" onInputChange={handleEmailChange} />
+                                    Coba masuk dengan <span className='text-blue-500 hover:cursor-pointer' onClick={() => {handleUseUsername(true)}}>username</span></p>
+                                <InputText id="email" type="text" placeholder="Email" onInputChange={setEmail} />
                             </>
                         }
-                        <InputText id="password" type="password" placeholder="Password" onInputChange={handlePasswordChange} />
+                        <InputText id="password" type="password" placeholder="Password" onInputChange={setPassword} />
                     </div>
 
                     <button className="bg-blue-200 py-2 px-4 rounded-lg shadow-sm text-black"
@@ -121,16 +77,6 @@ export default function LoginLayout() {
                     <p className='font-body text-black'>
                         Belum punya akun? <Link href="/auth/register"><span className='text-blue-500 underline-offset-1'>Daftarkan</span></Link>.
                     </p>
-
-                    { isFailed ? 
-                        <div className='bg-red-300 px-4 py-2 rounded-lg'>
-                            <p className='font-body text-lg text-center text-black'>{message}</p>
-                        </div>
-                    : ( isSuccess ? 
-                        <div className='bg-green-300 px-4 py-2 rounded-lg'>
-                            <p className='font-body text-lg text-black'>Berhasil masuk!</p>
-                        </div>
-                    : <div></div> ) }
 
                 </div>
             

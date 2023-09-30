@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BackgroundImage from '@/components/BackgroundImage/BackgroundImage';
 import { useRouter } from 'next/navigation'
+import { useDispatch, useSelector } from 'react-redux';
+import { asyncPreloadProcess } from '@/states/preload/action';
 
 
 export default function Home() {
 
-    const router = useRouter()
+    const auth = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+
+    const router = useRouter();
+
+    useEffect(() => {
+        dispatch(asyncPreloadProcess());
+    }, [dispatch]);
+
+    if (auth) {
+        router.push("/overview");
+    }
 
     const handleRegister = async () => {
       router.push("/auth/register")

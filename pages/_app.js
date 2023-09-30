@@ -1,6 +1,10 @@
+import store from '@/states'
 import '@/styles/globals.css'
 
 import { Poppins, Roboto } from 'next/font/google'
+import { Provider } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
  
 const poppins = Poppins({
   subsets: ['latin'],
@@ -15,8 +19,14 @@ const roboto = Roboto({
 })
 
 export default function App({ Component, pageProps }) {
-  return ( <main className={`${poppins.variable} font-heading ${roboto.variable} font-body`}>
-      <Component {...pageProps} />
-  </main>
+  return ( 
+  <>
+    <ToastContainer />
+    <main className={`${poppins.variable} font-heading ${roboto.variable} font-body`}>    
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </main>
+  </>
   )
 }
