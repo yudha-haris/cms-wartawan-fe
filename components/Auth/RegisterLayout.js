@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InputText from "@/components/Inputs/Text";
 import Link from 'next/link';
+import axios from 'axios';
 import BackgroundImage from '@/components/BackgroundImage/BackgroundImage';
 import { useRouter } from "next/router";
 
@@ -8,11 +9,13 @@ export default function RegisterLayout() {
 
     const router = useRouter();
     
-    const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
+    // const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
+    const BE_URI = "http://localhost:9000";
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
 
     const [isSuccess, setIsSuccess] = useState(false);
     const [isFailed, setIsFailed] = useState(false);
@@ -32,13 +35,29 @@ export default function RegisterLayout() {
     const handleRegister = async () => {
 
         if (!(email !== "" && username !== "" && password !== "")) {
+            setMessage("Isi semua kolom terlebih dahulu!");
             setIsFailed(true);
         } else {
-            setIsFailed(false);
-            setIsSuccess(true);
-            setTimeout(() => {
-                router.push('/auth/login');
-              }, 3000);
+            
+            const response = await axios.post(
+                `${BE_URI}/auth/register`, 
+                { 
+                    "email": email,
+                    "username": username, 
+                    "password": password 
+                }
+                ).then( (response) => {
+                    if (response.data.message) {
+                        setMessage(response.data.message);
+                        setIsFailed(true);
+                    } else {
+                        setIsFailed(false);
+                        setIsSuccess(true);
+                        setTimeout(() => {
+                            router.push('/auth/login');
+                        }, 3000);
+                    }
+                });
         }
 
     };
@@ -46,7 +65,7 @@ export default function RegisterLayout() {
     return(
         <main className='flex justify-center items-center min-h-screen w-[640] bg-blue-50'>
 
-            <BackgroundImage image_url="https://source.unsplash.com/WYd_PkCa1BY" />
+            {/* <BackgroundImage image_url="https://source.unsplash.com/WYd_PkCa1BY" /> */}
 
                 <div className="flex flex-col items-center place-items-center p-20 gap-y-4 rounded-xl bg-white border-2 border-blue-400">
 
@@ -72,7 +91,7 @@ export default function RegisterLayout() {
 
                     { isFailed ? 
                         <div className='bg-red-300 px-4 py-2 rounded-lg'>
-                            <p className='font-body text-lg text-center text-black'>Isi semua kolom terlebih dahulu!</p>
+                            <p className='font-body text-lg text-center text-black'>{message}</p>
                         </div>
                     : ( isSuccess ? 
                         <div className='bg-green-300 px-4 py-2 rounded-lg'>
