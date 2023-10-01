@@ -21,6 +21,31 @@ const api = (() => {
     });
   }
 
+  async function register({email, username, password}) {
+    const response = await fetch(`${BASE_URL}/auth/register/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        username,
+        password,
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { message } = responseJson;
+
+    if (message) {
+      throw new Error(message);
+    }
+
+    return responseJson;
+  
+  }
+
   async function loginEmail({ email, password }) {
 
     const response = await fetch(`${BASE_URL}/auth/login/`, {
@@ -73,11 +98,32 @@ const api = (() => {
 
   }
 
+  async function getDraftList({
+    page = "1",
+    limit = "6",
+  } = {}) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/draft/list?page=${page}&limit=${limit}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const responseJson = await response.json();
+    return responseJson;
+
+  }
+
   return {
     putAccessToken,
     getAccessToken,
+    register,
     loginEmail,
     loginUsername,
+    getDraftList,
   };
 })();
 

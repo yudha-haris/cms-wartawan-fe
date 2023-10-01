@@ -2,14 +2,26 @@ import { toast } from "react-toastify";
 const { default: api } = require("@/utils/api");
 
 const ActionType = {
+    REGISTER: "REGISTER",
     LOGIN : "LOGIN",
     LOGOUT: "LOGOUT",
+}
+
+function setRegisterActionCreator(isLoggedIn) {
+    return {
+        type: ActionType.REGISTER,
+        payload: {
+            loginStatus: isLoggedIn,
+        }
+    }
 }
 
 function setLoginActionCreator(isLoggedIn) {
     return {
         type: ActionType.LOGIN,
-        payload: {loginStatus : isLoggedIn},
+        payload: {
+            loginStatus : isLoggedIn,
+        },
     };
 }
 
@@ -18,6 +30,32 @@ function setLogoutActionCreator() {
         type: ActionType.LOGOUT,
         payload: {
             loginStatus: false,
+        }
+    }
+}
+
+function register({email, username, password, onSuccess}) {
+    return async (dispatch) => {
+        try {
+            if (!(email !== "" && username !== "" && password !== "")) {
+                toast.error("Isi semua kolom yang dibutuhkan!", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+            } else {
+                const user = await api.register({email, username, password});
+                dispatch(setRegisterActionCreator(false));
+
+                toast.success("Pendaftaran Akun Berhasil, Silahkan Masuk", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+
+            onSuccess();
+            }
+
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
         }
     }
 }
@@ -36,11 +74,11 @@ function login({email, username, password, onSuccess}) {
                 dispatch(setLoginActionCreator(true));
             }
 
-            onSuccess();
-
             toast.success("Login Berhasil", {
                 position: toast.POSITION.TOP_CENTER,
-            })
+            });
+
+            onSuccess();
             
         } catch (error) {
             toast.error(error.message, {
@@ -61,6 +99,7 @@ export {
     ActionType,
     setLoginActionCreator,
     setLogoutActionCreator,
+    register,
     login,
     logout,
 }

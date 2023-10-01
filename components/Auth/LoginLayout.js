@@ -2,17 +2,13 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import InputText from "@/components/Inputs/Text";
 import Link from 'next/link';
-import axios from 'axios';
-import BackgroundImage from '@/components/BackgroundImage/BackgroundImage';
 import { useDispatch } from 'react-redux';
 import useInput from '@/hooks/useInput';
 import { login } from '@/states/auth/action';
 
 export default function LoginLayout() {
 
-    const router = useRouter()
-
-    const BE_URI = "http://localhost:9000";
+    const router = useRouter();
 
     const [email, setEmail] = useInput('')
     const [username, setUsername] = useInput('');
@@ -43,8 +39,6 @@ export default function LoginLayout() {
 
     return(
         <main className='flex justify-center items-center min-h-screen w-[640] bg-blue-50'>
-
-            {/* <BackgroundImage image_url="https://source.unsplash.com/WYd_PkCa1BY" /> */}
 
                 <div className="flex flex-col items-center place-items-center p-20 gap-y-4 rounded-xl bg-white border-2 border-blue-400">
                     
