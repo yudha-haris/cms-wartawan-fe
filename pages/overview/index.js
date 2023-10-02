@@ -9,14 +9,20 @@ import { getDraftList } from '@/states/draft_list/action';
 export default function Overview() {
 
   const auth = useRequireAuth();
-
   const router = useRouter();
 
   const draft_list = useSelector((state) => state.draft_list);
   const dispatch = useDispatch();
 
+  const [totalPage, setTotalPage] = useState(1);
+
   useEffect(() => {
-    dispatch(getDraftList({ "page": 1, "limit": 3 }));
+    dispatch(getDraftList({
+      "page": 1, "limit": 3,
+      onSuccess: (value) => {
+        setTotalPage(value.total_pages);
+      },
+    }));
   }, [dispatch]);
 
   const handleViewDraf = (id) => {

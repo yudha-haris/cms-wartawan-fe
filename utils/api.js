@@ -147,9 +147,23 @@ const api = (() => {
 
   }
 
-  async function saveDraftToDraft({ id, content }) {
+  async function editDraft({ id, content }) {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/draft/edit/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content,
+        }),
+      });
+  }
+
+  async function saveDraftToNew({ id, content }) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/draft/save/${id}`,
       {
         method: "POST",
         headers: {
@@ -170,7 +184,8 @@ const api = (() => {
     getDraftList,
     getDraftById,
     createDraft,
-    saveDraftToDraft,
+    editDraft,
+    saveDraftToNew,
   };
 })();
 
