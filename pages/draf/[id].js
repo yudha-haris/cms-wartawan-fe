@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import DraftViewLayout from "@/components/Draf/DraftViewLayout";
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
 
@@ -20,15 +19,11 @@ export default function ViewDrafBeritaById() {
 
   }, [dispatch, id]);
 
-  const handleViewDraf = (id) => {
-    router.push(`/draf/${id}`)
-  };
-
   if (!draft_detail) {
     return (<div></div>)
   }
 
   return (
-    <DraftViewLayout title={draft_detail.title} content={draft_detail.content} />
+    <DraftViewLayout draftId={id} title={draft_detail.title} content={draft_detail.content} />
   );
 }

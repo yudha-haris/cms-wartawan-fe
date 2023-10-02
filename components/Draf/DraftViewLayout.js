@@ -1,8 +1,12 @@
 import { useRouter } from 'next/navigation'
 
-export default function DraftViewLayout({ title, content }) {
+export default function DraftViewLayout({ draftId, title, content }) {
 
     const router = useRouter();
+
+    const handleEditDraf = () => {
+        router.push(`/draf/edit/${draftId}`)
+    };
 
     return (
         <main className='bg-blue-50'>
@@ -17,8 +21,11 @@ export default function DraftViewLayout({ title, content }) {
                     {content}
                 </div>
                 <div className='flex flex-row justify-end gap-3'>
-                    <button disabled={true} className='font-body text-md self-stretch px-4 py-2 bg-blue-300 rounded-lg'>Opsi Penyimpanan</button>
-                    <button disabled={true} className='font-body text-md self-stretch px-4 py-2 bg-blue-300 rounded-lg'>Simpan</button>
+                    <button disabled={true}
+                        className='font-body text-md self-stretch px-4 py-2 bg-blue-300 rounded-lg disabled:opacity-75'>Tambah Komentar</button>
+                    <button
+                        onClick={() => handleEditDraf()}
+                        className='font-body text-md self-stretch px-4 py-2 bg-blue-300 rounded-lg'>Edit</button>
                 </div>
             </div>
         </main>

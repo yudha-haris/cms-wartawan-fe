@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import DraftEditLayout from "@/components/Draf/DraftEditLayout";
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
 
@@ -25,6 +24,6 @@ export default function EditDrafBeritaById() {
   }
 
   return (
-    <DraftEditLayout title={draft_detail.title} content={draft_detail.content} />
+    <DraftEditLayout id={id} title={draft_detail.title} content={draft_detail.content} />
   );
 }

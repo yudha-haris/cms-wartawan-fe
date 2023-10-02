@@ -159,6 +159,10 @@ const api = (() => {
           content,
         }),
       });
+
+    const responseJson = await response.json();
+    return responseJson;
+
   }
 
   async function saveDraftToNew({ id, content }) {
@@ -173,6 +177,10 @@ const api = (() => {
           content,
         }),
       });
+
+    const responseJson = await response.json();
+    return responseJson;
+
   }
 
   return {
