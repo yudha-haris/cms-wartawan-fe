@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const api = (() => {
   const BASE_URL = "http://localhost:9000";
 
@@ -21,7 +19,7 @@ const api = (() => {
     });
   }
 
-  async function register({email, username, password}) {
+  async function register({ email, username, password }) {
     const response = await fetch(`${BASE_URL}/auth/register/`, {
       method: "POST",
       headers: {
@@ -43,7 +41,7 @@ const api = (() => {
     }
 
     return responseJson;
-  
+
   }
 
   async function loginEmail({ email, password }) {
@@ -72,7 +70,7 @@ const api = (() => {
 
   }
 
-  async function loginUsername({username, password }) {
+  async function loginUsername({ username, password }) {
 
     const response = await fetch(`${BASE_URL}/auth/login/`, {
       method: "POST",
@@ -116,7 +114,7 @@ const api = (() => {
 
   }
 
-  async function getDraftById({id}) {
+  async function getDraftById({ id }) {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/draft/${id}`,
       {
@@ -131,7 +129,7 @@ const api = (() => {
 
   }
 
-  async function createDraft({prompt}) {
+  async function createDraft({ prompt }) {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/draft/create`,
       {
@@ -149,18 +147,18 @@ const api = (() => {
 
   }
 
-  async function saveDraftToDraft({id, content}) {
+  async function saveDraftToDraft({ id, content }) {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/draft/edit/${id}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        content,
-      }),
-    });
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content,
+        }),
+      });
   }
 
   return {

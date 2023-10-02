@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Textbox from '../Inputs/Textbox';
 import Sidebar from '../Sidebar/Sidebar';
 import { useRouter } from 'next/navigation'

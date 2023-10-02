@@ -8,15 +8,9 @@ import { getDraftList } from '@/states/draft_list/action';
 
 export default function Overview() {
 
-  const JUDUL_PLACEHOLDER = "Manchester United Menghancurkan Arsenal dengan Skor 8-2 di Tahun 2011";
-  const TIME_PLACEHOLDER = "09.00 12/09/2023";
-
   const auth = useRequireAuth();
 
   const router = useRouter();
-
-  const [drafts, setDrafts] = useState([]);
-  const [JWT_TOKEN, setJWT_TOKEN] = useState('');
 
   const draft_list = useSelector((state) => state.draft_list);
   const dispatch = useDispatch();
@@ -45,7 +39,6 @@ export default function Overview() {
           <div className='flex flex-col w-2/3 rounded-xl bg-white border-2 border-blue-400'>
             <h1 className='font-heading text-xl pt-6 font-bold px-8 self-stretch text-blue-600'>Draf Berita Terbaru</h1>
             <div className='flex flex-col py-2 self-stretch items-start content-start'>
-              {/* <ListItem title={JUDUL_PLACEHOLDER} time={TIME_PLACEHOLDER} onClick={() => router.push('/draf/view')} /> */}
               {(draft_list.draft_berita).map((draft) => (
                 <ListItem key={draft.draft_id} title={draft.title} time={draft.created_at}
                   onClick={() => handleViewDraf(draft.draft_id)} />

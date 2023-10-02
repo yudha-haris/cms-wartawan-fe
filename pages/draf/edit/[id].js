@@ -7,29 +7,24 @@ import { getDraftDetailById } from '@/states/draft/action';
 
 export default function EditDrafBeritaById() {
 
-    const BE_URI = "https://ta-aings-399219.uc.r.appspot.com";
+  const router = useRouter();
+  const { id } = router.query;
 
-    const router = useRouter();
-    const { id } = router.query;
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [loader, setLoader] = useState(false);
+  const draft_detail = useSelector((state) => state.draft_detail);
+  const dispatch = useDispatch();
 
-    const draft_detail = useSelector((state) => state.draft_detail);
-    const dispatch = useDispatch();
+  useEffect(() => {
+    if (id) {
+      dispatch(getDraftDetailById({ id }));
+    }
 
-    useEffect( () => {
-      if (id) {
-        dispatch(getDraftDetailById({id}));
-      } 
-      
-    }, [dispatch, id]);
+  }, [dispatch, id]);
 
-    if (!draft_detail) {
-      return (<div></div>)
-    } 
+  if (!draft_detail) {
+    return (<div></div>)
+  }
 
-    return (
-        <DraftEditLayout title={draft_detail.title} content={draft_detail.content} />
-    );
+  return (
+    <DraftEditLayout title={draft_detail.title} content={draft_detail.content} />
+  );
 }
