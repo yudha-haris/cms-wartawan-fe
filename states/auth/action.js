@@ -3,15 +3,15 @@ const { default: api } = require("@/utils/api");
 
 const ActionType = {
     REGISTER: "REGISTER",
-    LOGIN : "LOGIN",
+    LOGIN: "LOGIN",
     LOGOUT: "LOGOUT",
 }
 
-function setRegisterActionCreator(isLoggedIn) {
+function setRegisterActionCreator() {
     return {
         type: ActionType.REGISTER,
         payload: {
-            loginStatus: isLoggedIn,
+            loginStatus: false,
         }
     }
 }
@@ -20,7 +20,7 @@ function setLoginActionCreator(isLoggedIn) {
     return {
         type: ActionType.LOGIN,
         payload: {
-            loginStatus : isLoggedIn,
+            loginStatus: isLoggedIn,
         },
     };
 }
@@ -34,7 +34,7 @@ function setLogoutActionCreator() {
     }
 }
 
-function register({email, username, password, onSuccess}) {
+function register({ email, username, password, onSuccess }) {
     return async (dispatch) => {
         try {
             if (!(email !== "" && username !== "" && password !== "")) {
@@ -42,14 +42,14 @@ function register({email, username, password, onSuccess}) {
                     position: toast.POSITION.TOP_CENTER,
                 });
             } else {
-                const user = await api.register({email, username, password});
-                dispatch(setRegisterActionCreator(false));
+                const user = await api.register({ email, username, password });
+                dispatch(setRegisterActionCreator());
 
                 toast.success("Pendaftaran Akun Berhasil, Silahkan Masuk", {
                     position: toast.POSITION.TOP_CENTER,
                 });
 
-            onSuccess();
+                onSuccess();
             }
 
         } catch (error) {
@@ -60,16 +60,16 @@ function register({email, username, password, onSuccess}) {
     }
 }
 
-function login({email, username, password, onSuccess}) {
+function login({ email, username, password, onSuccess }) {
     return async (dispatch) => {
         try {
             if (email) {
-                const token = await api.loginEmail({email, password});
+                const token = await api.loginEmail({ email, password });
                 api.putAccessToken(token);
                 dispatch(setLoginActionCreator(true));
 
             } else {
-                const token = await api.loginUsername({username, password});
+                const token = await api.loginUsername({ username, password });
                 api.putAccessToken(token);
                 dispatch(setLoginActionCreator(true));
             }
@@ -79,7 +79,7 @@ function login({email, username, password, onSuccess}) {
             });
 
             onSuccess();
-            
+
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
