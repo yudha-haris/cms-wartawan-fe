@@ -109,12 +109,58 @@ const api = (() => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
-    );
+      });
 
     const responseJson = await response.json();
     return responseJson;
 
+  }
+
+  async function getDraftById({id}) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/draft/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+    const responseJson = await response.json();
+    return responseJson;
+
+  }
+
+  async function createDraft({prompt}) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/draft/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
+
+    const responseJson = await response.json();
+    return responseJson;
+
+  }
+
+  async function saveDraftToDraft({id, content}) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/draft/edit/${id}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content,
+      }),
+    });
   }
 
   return {
@@ -124,6 +170,9 @@ const api = (() => {
     loginEmail,
     loginUsername,
     getDraftList,
+    getDraftById,
+    createDraft,
+    saveDraftToDraft,
   };
 })();
 

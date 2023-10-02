@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import DraftViewLayout from "@/components/Draf/DraftViewLayout";
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDraftDetailById } from '@/states/draft/action';
 
 export default function ViewDrafBeritaById() {
 
@@ -14,6 +16,16 @@ export default function ViewDrafBeritaById() {
 
     const [JWT_TOKEN, setJWT_TOKEN] = useState('');
 
+    const draft_detail = useSelector((state) => state.draft_detail);
+    const dispatch = useDispatch();
+
+    useEffect( () => {
+      if (id) {
+        dispatch(getDraftDetailById({id}));
+      } 
+      
+    }, [dispatch, id]);
+
     const getHeaders = () => {
         return {
           'Authorization': `Bearer ${JWT_TOKEN}`,
@@ -22,32 +34,40 @@ export default function ViewDrafBeritaById() {
         };
       };
 
-    useEffect( () => {
-        const token = localStorage.getItem('jwtToken');
-        if (token) {
-            setJWT_TOKEN(token);
-        };
+    // useEffect( () => {
+    //     const token = localStorage.getItem('jwtToken');
+    //     if (token) {
+    //         setJWT_TOKEN(token);
+    //     };
 
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(
-                    BE_URI.concat(`/v1/draft/${id}`), 
-                    { headers: getHeaders() });
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get(
+    //                 BE_URI.concat(`/v1/draft/${id}`), 
+    //                 { headers: getHeaders() });
                 
-                const data = response.data;
-                setTitle(data.title);
-                setContent(data.content);
+    //             const data = response.data;
+    //             setTitle(data.title);
+    //             setContent(data.content);
                 
-            } catch (error) {
-              console.error('Error fetching item:', error);
-            }
-          };
+    //         } catch (error) {
+    //           console.error('Error fetching item:', error);
+    //         }
+    //       };
       
-        fetchData();
+    //     fetchData();
 
-    }, [JWT_TOKEN, id]);
+    // }, [JWT_TOKEN, id]);
+
+    const handleViewDraf = (id) => {
+      router.push(`/draf/${id}`)
+    };
+
+    if (!draft_detail) {
+      return (<div></div>)
+    } 
 
     return (
-        <DraftViewLayout title={title} content={content} />
+        <DraftViewLayout title={draft_detail.title} content={draft_detail.content} />
     );
 }

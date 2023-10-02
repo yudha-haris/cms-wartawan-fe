@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import DraftEditLayout from "@/components/Draf/DraftEditLayout";
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDraftDetailById } from '@/states/draft/action';
 
 export default function EditDrafBeritaById() {
 
@@ -13,48 +15,21 @@ export default function EditDrafBeritaById() {
     const [content, setContent] = useState("");
     const [loader, setLoader] = useState(false);
 
-    const [JWT_TOKEN, setJWT_TOKEN] = useState('');
-
-    const getHeaders = () => {
-        return {
-          'Authorization': `Bearer ${JWT_TOKEN}`,
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': BE_URI,
-        };
-      };
+    const draft_detail = useSelector((state) => state.draft_detail);
+    const dispatch = useDispatch();
 
     useEffect( () => {
-        const token = localStorage.getItem('jwtToken');
-        if (token) {
-            setJWT_TOKEN(token);
-        };
-
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(
-                    // BE_URI.concat(`/v1/draft/${id}`),
-                    `${BE_URI}/v1/draft/${id}`, 
-                    { headers: getHeaders() });
-                
-                const data = response.data;
-                setTitle(data.title);
-                setContent(data.content);
-                console.log(data);
-                
-            } catch (error) {
-              console.error('Error fetching item:', error);
-            }
-          };
+      if (id) {
+        dispatch(getDraftDetailById({id}));
+      } 
       
-        fetchData();
-        setLoader(true);
+    }, [dispatch, id]);
 
-        console.log(title);
-        console.log(content);
-        
-    }, [JWT_TOKEN]);
+    if (!draft_detail) {
+      return (<div></div>)
+    } 
 
     return (
-        <DraftEditLayout title={title} content={content} />
+        <DraftEditLayout title={draft_detail.title} content={draft_detail.content} />
     );
 }

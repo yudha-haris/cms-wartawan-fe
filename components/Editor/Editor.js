@@ -12,8 +12,7 @@ const Editor = ({ contents, onChange = "", className }) => {
     <MDXEditor
       className={className}
       markdown={contents}
-      plugins={
-        onChange && [
+      plugins={[
           toolbarPlugin({
             toolbarContents: () => (
               <div className="flex flex-row contents-start">

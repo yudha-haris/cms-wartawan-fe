@@ -3,7 +3,8 @@ import { useRouter } from 'next/navigation'
 export default function DraftViewLayout( {title, content} ) {
     
     const router = useRouter()
-    const DRAFT_CONTENT_EDITED = content.split(/\n/g);
+    // const DRAFT_CONTENT_EDITED = content.split(/\n/g);
+    // const DRAFT_CONTENT_EDITED = content;
 
     return (
         <main className='bg-blue-50'>
@@ -15,14 +16,15 @@ export default function DraftViewLayout( {title, content} ) {
                 </div>
                 <div className="flex flex-col h-[480px] py-8 px-12 items-start self-stretch 
                     bg-white border-2 border-blue-400 rounded-xl gap-y-2 overflow-y-auto">
-                    {DRAFT_CONTENT_EDITED.map((line, index) => (
+                    {/* {DRAFT_CONTENT_EDITED.map((line, index) => (
                         <p key={index} className="font-body text-lg text-black"> {line} </p>
-                    ))}
+                    ))} */}
+                    {content}
                 </div>
-                {/* <div className='flex flex-row justify-end gap-3'>
-                    <button disabled="true" className='font-body text-md self-stretch px-4 py-2 bg-blue-300 rounded-lg'>Opsi Penyimpanan</button>
-                    <button disabled="true" className='font-body text-md self-stretch px-4 py-2 bg-blue-300 rounded-lg'>Simpan</button>
-                </div> */}
+                <div className='flex flex-row justify-end gap-3'>
+                    <button disabled={true} className='font-body text-md self-stretch px-4 py-2 bg-blue-300 rounded-lg'>Opsi Penyimpanan</button>
+                    <button disabled={true} className='font-body text-md self-stretch px-4 py-2 bg-blue-300 rounded-lg'>Simpan</button>
+                </div>
             </div>
         </main>
     );

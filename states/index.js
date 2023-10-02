@@ -1,12 +1,16 @@
+import authUserReducer from "./auth/reducer";
 import preloadReducer from "./preload/reducer";
+import draftListReducer from "./draft_list/reducer";
+import draftDetailReducer from "./draft/reducer";
 
 const { configureStore } = require("@reduxjs/toolkit");
-const { default: authUserReducer } = require("./auth/reducer");
 
 const store = configureStore({
     reducer: {
         auth: authUserReducer,
         preload: preloadReducer,
+        draft_list: draftListReducer,
+        draft_detail: draftDetailReducer,
     }
 })
 
