@@ -1,10 +1,11 @@
-export default function ListItem({title, time, onClick}) {
+import DatetimeConverter from "@/utils/datetimeConverter";
 
-    const timestamp = new Date(time);
-    const formattedDate = timestamp.toLocaleString();
+export default function ListItem({ title, time, onClick }) {
+
+    const formattedDate = DatetimeConverter({ datetime: time });
 
     return (
-        <div onClick={() => onClick() } 
+        <div onClick={() => onClick()}
             className="flex flex-col items-start self-stretch py-3 px-8
                             bg-white-200 border-solid border-b-2 border-black-950
                             hover:cursor-pointer">
