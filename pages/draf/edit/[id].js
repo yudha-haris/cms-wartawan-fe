@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import DraftEditLayout from "@/components/Draf/DraftEditLayout";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
+import SidebarKomentar from '@/components/Sidebar/SidebarKomentar';
 
 export default function EditDrafBeritaById() {
 
@@ -24,6 +25,9 @@ export default function EditDrafBeritaById() {
   }
 
   return (
-    <DraftEditLayout id={id} title={draft_detail.title} content={draft_detail.content} />
+    <main className='flex flex-row items-start min-h-screen w-full'>
+      <DraftEditLayout id={id} title={draft_detail.title} content={draft_detail.content} />
+      <SidebarKomentar isAddable={false} />
+    </main>
   );
 }

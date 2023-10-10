@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Sidebar from '@/components/Sidebar/Sidebar';
+import Sidebar from '@/components/Sidebar/SidebarMain';
 import ListItem from '@/components/ListItem/ListItem';
 import { useRouter } from 'next/navigation';
 import useRequireAuth from '@/hooks/useRequireAuth';

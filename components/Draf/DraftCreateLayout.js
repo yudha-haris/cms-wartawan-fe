@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Textbox from '../Inputs/Textbox';
-import Sidebar from '../Sidebar/Sidebar';
+import Sidebar from '../Sidebar/SidebarMain';
 import { useRouter } from 'next/navigation'
 import DraftViewAfterCreateLayout from './DraftViewAfterCreateLayout';
 import { useDispatch } from 'react-redux';
