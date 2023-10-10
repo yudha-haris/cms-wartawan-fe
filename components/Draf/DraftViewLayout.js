@@ -30,12 +30,12 @@ export default function DraftViewLayout({ draftId, title, content }) {
             <div className='flex flex-row gap-3 self-stretch justify-between'>
                 <button
                     onClick={() => router.back()}
-                    className="font-body self-stretch py-3 px-4 border-2 text-blue-600 border-blue-600 rounded-lg hover:bg-blue-400 hover:text-white">
+                    className="font-body self-stretch py-2 px-4 border-2 text-blue-600 border-blue-600 rounded-lg hover:bg-blue-400 hover:text-white">
                     Kembali
                 </button>
                 <button
                     onClick={() => handleEditDraf()}
-                    className='font-body self-stretch py-3 px-5 border-2 text-white bg-blue-600 rounded-lg hover:bg-blue-400'>
+                    className='font-body self-stretch py-2 px-5 border-2 text-white bg-blue-600 rounded-lg hover:bg-blue-400'>
                     Edit Draf Berita
                 </button>
             </div>
