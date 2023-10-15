@@ -1,5 +1,7 @@
 const api = (() => {
+
   const BASE_URL = "http://localhost:9000";
+  // const BASE_URL = "https://ta-aings-399219.uc.r.appspot.com";
 
   function putAccessToken(token) {
     localStorage.setItem("accessToken", token);
@@ -101,7 +103,7 @@ const api = (() => {
     limit = "6",
   } = {}) {
     const response = await fetchWithAuth(
-      `${BASE_URL}/v1/draft/list?page=${page}&limit=${limit}`,
+      `${BASE_URL}/v1/draft?page=${page}&limit=${limit}`,
       {
         method: "GET",
         headers: {
@@ -131,7 +133,7 @@ const api = (() => {
 
   async function createDraft({ prompt }) {
     const response = await fetchWithAuth(
-      `${BASE_URL}/v1/draft/create`,
+      `${BASE_URL}/v1/draft`,
       {
         method: "POST",
         headers: {
@@ -149,9 +151,9 @@ const api = (() => {
 
   async function editDraft({ id, content }) {
     const response = await fetchWithAuth(
-      `${BASE_URL}/v1/draft/edit/${id}`,
+      `${BASE_URL}/v1/draft/${id}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

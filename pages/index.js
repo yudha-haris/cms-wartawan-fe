@@ -17,6 +17,8 @@ export default function Home() {
 
     if (auth) {
         router.push("/overview");
+    } else {
+        router.push("/auth/login");
     }
 
     const handleRegister = async () => {

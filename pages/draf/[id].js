@@ -4,9 +4,11 @@ import DraftViewLayout from "@/components/Draf/DraftViewLayout";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
 import SidebarKomentar from '@/components/Sidebar/SidebarKomentar';
+import useRequireAuth from '@/hooks/useRequireAuth';
 
 export default function ViewDrafBeritaById() {
 
+  const auth = useRequireAuth();
   const router = useRouter();
   const { id } = router.query;
 

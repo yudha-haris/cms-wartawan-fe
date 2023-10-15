@@ -4,10 +4,12 @@ import DraftEditLayout from "@/components/Draf/DraftEditLayout";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
 import SidebarKomentar from '@/components/Sidebar/SidebarKomentar';
+import useRequireAuth from '@/hooks/useRequireAuth';
 
 export default function EditDrafBeritaById() {
 
   const router = useRouter();
+  const auth = useRequireAuth();
   const { id } = router.query;
 
   const draft_detail = useSelector((state) => state.draft_detail);

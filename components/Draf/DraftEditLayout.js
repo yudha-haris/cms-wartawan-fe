@@ -3,18 +3,20 @@ import Editor from "../Editor/Editor";
 import useInput from "@/hooks/useInput";
 import { editDraft, saveDraftToNew } from "@/states/draft/action";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function DraftEditLayout({ id, title, content }) {
 
-    const [saveToNew, setSaveToNew] = useInput(false);
+    const [saveToNew, setSaveToNew] = useState(false);
+    const [editedContent, setEditedContent] = useInput(content);
     const router = useRouter();
     const dispatch = useDispatch();
 
     const handleSaveDraf = () => {
         if (saveToNew) {
-            dispatch(saveDraftToNew({ id, content }));
+            dispatch(saveDraftToNew({ id, editedContent }));
         } else {
-            dispatch(editDraft({ id, content }));
+            dispatch(editDraft({ id, editedContent }));
         }
     };
 
@@ -33,7 +35,7 @@ export default function DraftEditLayout({ id, title, content }) {
             <Editor
                 className="flex flex-col h-[440px] py-3 px-10 items-start self-stretch 
                 bg-white border-2 border-blue-400 rounded-md gap-y-2 overflow-y-auto"
-                contents={content} />
+                contents={editedContent} onChange={setEditedContent} />
             <div className='flex flex-row py-3 gap-3 self-stretch justify-between'>
                 <button
                     onClick={() => router.back()}
@@ -41,21 +43,21 @@ export default function DraftEditLayout({ id, title, content }) {
                     Kembali
                 </button>
                 <div className="flex flex-row justify-end items-center gap-5">
-                    <div className="flex flex-row">
+                    <div className="flex flex-row border-2 rounded-lg overflow-hidden">
                         <button disabled={true}
                             className="flex-shrink-0 z-10 inline-flex items-center py-2 px-5 text-sm 
                                 font-medium text-black text-center bg-gray-100 border border-gray-300 
-                                rounded-l-lg focus:ring-4 focus:outline-none focus:ring-gray-100">Simpan Sebagai</button>
+                                focus:ring-4 focus:outline-none focus:ring-gray-100">Simpan Sebagai</button>
                         <select id="draft-save-options" value={saveToNew} onChange={setSaveToNew}
-                            className="bg-gray-50 border border-gray-300 font-body py-2 px-5
-                                text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ">
+                            className="bg-gray-50 outline-2 outline-offset-0 border-gray-300 font-body py-2 px-5
+                                text-gray-900 text-sm hover:outline-blue-500 block w-full ">
                             <option value={false}>Draft</option>
                             <option value={true}>New</option>
                         </select>
                     </div>
                     <button
                         onClick={() => handleSaveDraf()}
-                        className='font-body self-stretch py-2 px-5 border-2 text-white bg-blue-600 rounded-lg hover:bg-blue-400'>Simpan
+                        className='font-body outline-2 outline-offset-0 outline-blue-500 self-stretch py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400'>Simpan
                     </button>
                 </div>
             </div>
