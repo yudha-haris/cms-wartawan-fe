@@ -38,10 +38,10 @@ export default function Home() {
                     <p className='font-body text-lg place-self-center text-center text-black'>Artificial Intelligence News Generator System</p>
                 </div>
 
-                <button className="bg-blue-200 py-2 px-4 rounded-lg shadow-sm self-stretch text-black"
+                <button className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400 self-stretch"
                     onClick={handleRegister}>Daftarkan Akun</button>
 
-                <button className="bg-blue-200 py-2 px-4 rounded-lg shadow-sm self-stretch text-black"
+                <button className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400 self-stretch"
                     onClick={handleLogin}>Masuk dengan Akun yang Sudah Ada</button>
 
             </div>

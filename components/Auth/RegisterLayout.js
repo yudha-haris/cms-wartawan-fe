@@ -43,7 +43,7 @@ export default function RegisterLayout() {
                     <InputText id="password" type="password" placeholder="Password" onInputChange={setPassword} />
                 </div>
 
-                <button className="bg-blue-200 py-2 px-4 rounded-lg shadow-sm text-black"
+                <button className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
                     onClick={handleRegister}>Daftar</button>
 
                 <p className='font-body text-black'>
