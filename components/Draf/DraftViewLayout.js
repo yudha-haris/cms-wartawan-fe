@@ -1,8 +1,5 @@
 import { useRouter } from 'next/navigation'
 import Editor from '../Editor/Editor';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getCommentByVersionId } from '@/states/comment/action';
 
 export default function DraftViewLayout({ draftId, title, content }) {
 
