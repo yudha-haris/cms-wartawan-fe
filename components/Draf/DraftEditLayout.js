@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function DraftEditLayout({ id, title, content }) {
 
     const [saveToNew, setSaveToNew] = useState(false);
-    const [editedContent, setEditedContent] = useInput(content);
+    const [editedContent, setEditedContent] = useState(content);
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -18,6 +18,7 @@ export default function DraftEditLayout({ id, title, content }) {
         } else {
             dispatch(editDraft({ id, editedContent }));
         }
+        router.push(`/draf/${id}`);
     };
 
     return (
@@ -35,7 +36,7 @@ export default function DraftEditLayout({ id, title, content }) {
             <Editor
                 className="flex flex-col h-[440px] py-3 px-10 items-start self-stretch 
                 bg-white border-2 border-blue-400 rounded-md gap-y-2 overflow-y-auto"
-                contents={editedContent} onChange={setEditedContent} />
+                contents={editedContent} onChange={(value) => { setEditedContent(value); }} />
             <div className='flex flex-row py-3 gap-3 self-stretch justify-between'>
                 <button
                     onClick={() => router.back()}

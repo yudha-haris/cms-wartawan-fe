@@ -1,7 +1,6 @@
 const api = (() => {
 
-  const BASE_URL = "http://localhost:9000";
-  // const BASE_URL = "https://ta-aings-399219.uc.r.appspot.com";
+  const BASE_URL = "https://ta-aings-399219.uc.r.appspot.com";
 
   function putAccessToken(token) {
     localStorage.setItem("accessToken", token);
@@ -185,6 +184,38 @@ const api = (() => {
 
   }
 
+  async function getComment({ versionId }) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/comment/${versionId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+    const responseJson = await response.json();
+    return responseJson;
+
+  }
+
+  async function createComment({ versionId }) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/comment/${versionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content,
+        }),
+      });
+
+    const responseJson = await response.json();
+    return responseJson;
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -196,6 +227,8 @@ const api = (() => {
     createDraft,
     editDraft,
     saveDraftToNew,
+    getComment,
+    createComment,
   };
 })();
 

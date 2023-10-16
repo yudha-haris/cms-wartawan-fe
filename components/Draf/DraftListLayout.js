@@ -17,7 +17,7 @@ export default function DraftListLayout() {
 
   useEffect(() => {
     dispatch(getDraftList({
-      "page": page, "limit": 5,
+      "page": page, "limit": 8,
       onSuccess: (value) => {
         setTotalPage(value.total_pages);
       },
@@ -56,7 +56,7 @@ export default function DraftListLayout() {
             <h1 className='font-heading text-xl font-bold self-stretch text-black'>Semua Draf Berita</h1>
           </div>
 
-          <div className='flex flex-col items-start self-stretch'>
+          <div className='flex flex-col items-start self-stretch overflow-y-auto'>
             {(draft_list.draft_berita).map((draft) => (
               <ListItem key={draft.draft_id} title={draft.title} time={draft.created_at}
                 onClick={() => handleViewDraf(draft.draft_id)} />
