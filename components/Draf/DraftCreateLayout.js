@@ -12,7 +12,7 @@ export default function DraftCreateLayout() {
 
     const [prompt, setPrompt] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isDoneGenerate, setIsDoneGenerate] = useState(true);
+    const [isDoneGenerate, setIsDoneGenerate] = useState(false);
 
     const PROMPT_PREPEND = "Buatkan berita mengenai ";
 
