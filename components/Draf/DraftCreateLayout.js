@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import DraftViewAfterCreateLayout from './DraftViewAfterCreateLayout';
 import { useDispatch } from 'react-redux';
 import { createDraft } from '@/states/draft/action';
+import { toast } from 'react-toastify';
 
 export default function DraftCreateLayout() {
 
@@ -31,23 +32,29 @@ export default function DraftCreateLayout() {
 
     const handleGenerateBerita = async () => {
 
-        setIsLoading(true);
-        dispatch(createDraft({
-            prompt: `${PROMPT_PREPEND} ${prompt}`,
-            onSuccess: (value) => {
-                setTitle(value.title);
-                setContent(value.content);
-                setIsLoading(false);
-                setIsDoneGenerate(true);
-            },
-            onError: () => {
-                setIsLoading(false);
-            }
-        }))
+        if (prompt === '') {
+            toast.error("Masukkan prompt untuk generate berita!", {
+                position: toast.POSITION.TOP_CENTER,
+            })
+        } else {
+            setIsLoading(true);
+            dispatch(createDraft({
+                prompt: `${PROMPT_PREPEND} ${prompt}`,
+                onSuccess: (value) => {
+                    setTitle(value.title);
+                    setContent(value.content);
+                    setIsLoading(false);
+                    setIsDoneGenerate(true);
+                },
+                onError: () => {
+                    setIsLoading(false);
+                }
+            }));
+        }
     }
 
     return (
-        <main className="flex flex-row max-h-screen w-full bg-blue-50">
+        <main className="flex flex-row min-h-screen w-full bg-blue-50">
             <Sidebar />
             <div className="flex flex-col w-4/5 p-20">
 
