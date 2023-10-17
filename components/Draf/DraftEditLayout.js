@@ -12,7 +12,11 @@ export default function DraftEditLayout({ draft_detail }) {
     const [editedContent, setEditedContent] = useState(draft_detail.content);
     const router = useRouter();
     const dispatch = useDispatch();
-    const formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
+    var formattedDate;
+
+    if (draft_detail) {
+        formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
+    }
 
     const handleSaveDraf = () => {
         if (saveToNew) {

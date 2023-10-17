@@ -5,7 +5,12 @@ import DatetimeConverter from '@/utils/datetimeConverter';
 export default function DraftViewLayout({ draft_detail }) {
 
     const router = useRouter();
-    const formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
+
+    var formattedDate;
+
+    if (draft_detail) {
+        formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
+    }
 
     return (
         <div className="flex flex-col items-start self-stretch py-10 px-20 gap-4 bg-blue-50 max-h-screen w-3/4">
