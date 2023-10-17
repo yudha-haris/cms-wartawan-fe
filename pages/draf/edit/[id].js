@@ -28,7 +28,7 @@ export default function EditDrafBeritaById() {
 
   return (
     <main className='flex flex-row items-start min-h-screen w-full'>
-      <DraftEditLayout id={id} title={draft_detail.title} content={draft_detail.content} />
+      <DraftEditLayout draft_detail={draft_detail} />
       <SidebarKomentar isAddable={false} />
     </main>
   );
