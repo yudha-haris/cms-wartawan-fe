@@ -9,14 +9,16 @@ import DatetimeConverter from "@/utils/datetimeConverter";
 export default function DraftEditLayout({ draft_detail }) {
 
     const [saveToNew, setSaveToNew] = useState(false);
-    const [editedContent, setEditedContent] = useState(draft_detail.content);
+    const [editedContent, setEditedContent] = useState("");
     const router = useRouter();
     const dispatch = useDispatch();
-    var formattedDate;
 
-    if (draft_detail) {
-        formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
+    if (!draft_detail) {
+        return (<div></div>);
     }
+
+    setEditedContent(draft_detail.content);
+    const formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
 
     const handleSaveDraf = () => {
         if (saveToNew) {
