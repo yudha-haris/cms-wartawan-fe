@@ -48,10 +48,7 @@ function getDraftDetailById({ id }) {
     return async (dispatch) => {
         try {
             const draft_detail = await api.getDraftById({ id });
-            console.log(draft_detail);
-            dispatch(setGetDraftActionCreator({
-                draft_detail,
-            }));
+            dispatch(setGetDraftActionCreator({ draft_detail }));
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
@@ -67,6 +64,29 @@ function createDraft({ prompt, onSuccess, onError }) {
             dispatch(setCreateDraftActionCreator({
                 draft_detail,
             }));
+            toast.success("Pembuatan draf berita berhasil!", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+            onSuccess(draft_detail);
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
+            onError();
+        }
+    }
+}
+
+function recreateDraft({ id, prompt, onSuccess, onError }) {
+    return async (dispatch) => {
+        try {
+            const draft_detail = await api.recreateDraft({ id, prompt });
+            dispatch(setCreateDraftActionCreator({
+                draft_detail,
+            }));
+            toast.success("Pembuatan ulang draf berita berhasil!", {
+                position: toast.POSITION.TOP_CENTER,
+            });
             onSuccess(draft_detail);
         } catch (error) {
             toast.error(error.message, {
@@ -116,6 +136,7 @@ export {
     setEditDraftActionCreator,
     getDraftDetailById,
     createDraft,
+    recreateDraft,
     editDraft,
     saveDraftToNew,
 }

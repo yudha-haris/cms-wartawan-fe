@@ -4,13 +4,14 @@ import Sidebar from '../Sidebar/SidebarMain';
 import { useRouter } from 'next/navigation'
 import DraftViewAfterCreateLayout from './DraftViewAfterCreateLayout';
 import { useDispatch } from 'react-redux';
-import { createDraft } from '@/states/draft/action';
+import { createDraft, recreateDraft } from '@/states/draft/action';
 import { toast } from 'react-toastify';
 
 export default function DraftCreateLayout() {
 
     const router = useRouter()
 
+    const [draft, setDraft] = useState({})
     const [prompt, setPrompt] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isDoneGenerate, setIsDoneGenerate] = useState(false);
@@ -33,7 +34,7 @@ export default function DraftCreateLayout() {
     const handleGenerateBerita = async () => {
 
         if (prompt === '') {
-            toast.error("Masukkan prompt untuk generate berita!", {
+            toast.error("Masukkan deskripsi berita!", {
                 position: toast.POSITION.TOP_CENTER,
             })
         } else {
@@ -41,8 +42,30 @@ export default function DraftCreateLayout() {
             dispatch(createDraft({
                 prompt: `${PROMPT_PREPEND} ${prompt}`,
                 onSuccess: (value) => {
-                    setTitle(value.title);
-                    setContent(value.content);
+                    setDraft(value);
+                    setIsLoading(false);
+                    setIsDoneGenerate(true);
+                },
+                onError: () => {
+                    setIsLoading(false);
+                }
+            }));
+        }
+    }
+
+    const handleMuatUlang = async () => {
+
+        if (prompt === '') {
+            toast.error("Masukkan deskripsi berita!", {
+                position: toast.POSITION.TOP_CENTER,
+            })
+        } else {
+            setIsLoading(true);
+            dispatch(recreateDraft({
+                id: draft.id,
+                prompt: `${PROMPT_PREPEND} ${prompt}`,
+                onSuccess: (value) => {
+                    setDraft(value);
                     setIsLoading(false);
                     setIsDoneGenerate(true);
                 },
@@ -81,7 +104,7 @@ export default function DraftCreateLayout() {
                             <button disabled type="button"
                                 className="
                                 font-body py-2 px-5
-                                font-medium bg-white rounded-lg border border-gray-200 
+                                font-medium bg-gray-100 rounded-lg border border-gray-200 
                                 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 
                                 inline-flex items-center text-black">
                                 <svg aria-hidden="true" role="status" className="inline w-6 h-6 mr-3 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,20 +115,15 @@ export default function DraftCreateLayout() {
                             </button>
                             : (isDoneGenerate ?
                                 <div className='flex flex-row items-center gap-2'>
-                                    <button disabled type='button'
-                                        className='font-body font-bold py-2 px-5 bg-green-400 rounded-lg font-body text-black'>Generate Done!</button>
                                     <button type='button'
                                         className='font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400'
-                                        onClick={handleGenerateBerita}>Muat Ulang</button>
-                                    <button type='button'
-                                        className='font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400'
-                                        onClick={handleStartOver}>Buat Ulang</button>
+                                        onClick={handleMuatUlang}>Buat Ulang Pembuatan Berita</button>
                                 </div>
 
                                 : <button
                                     className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
                                     onClick={handleGenerateBerita}>Buat Draf Berita</button>)
-                        } {isDoneGenerate ? (<DraftViewAfterCreateLayout title={title} content={content} />) : <p></p>}
+                        } {isDoneGenerate ? (<DraftViewAfterCreateLayout title={draft.title} content={draft.content} />) : <p></p>}
 
                     </div>
 
