@@ -117,7 +117,7 @@ export default function DraftCreateLayout() {
                                 <div className='flex flex-row items-center gap-2'>
                                     <button type='button'
                                         className='font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400'
-                                        onClick={handleMuatUlang}>Buat Ulang Pembuatan Berita</button>
+                                        onClick={handleMuatUlang}>Buat Ulang Draf Berita</button>
                                 </div>
 
                                 : <button
