@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
 import SidebarKomentar from '@/components/Sidebar/SidebarKomentar';
 import useRequireAuth from '@/hooks/useRequireAuth';
-import { getCommentByVersionId } from '@/states/comment/action';
 
 export default function ViewDrafBeritaById() {
 
