@@ -14,7 +14,7 @@ export default function DraftViewLayout({ draft_detail }) {
 
     return (
         <div className="flex flex-col items-start self-stretch py-10 px-20 gap-4 bg-blue-50 max-h-screen w-3/4">
-            <div className="flex flex-col items-start gap-4 self-stretch">
+            <div className="flex flex-col items-start gap-2 self-stretch">
                 <h1 className="font-heading text-4xl font-bold text-black">{draft_detail.title}</h1>
                 <div className="flex flex-row items-center self-stretch gap-3 py-2 border-b-2 border-black">
                     <button disabled={true} className="flex items-center py-1 px-2 bg-green-400 rounded-md">
@@ -32,17 +32,24 @@ export default function DraftViewLayout({ draft_detail }) {
                 <p className='font-body text-md self-stretch'>Dibuat Oleh:</p>
                 <p className='font-body text-md self-stretch'>Disupervisi Oleh:</p>
             </div>
-            <div className='flex flex-row gap-3 self-stretch justify-between'>
+            <div className='flex flex-row self-stretch justify-between'>
                 <button
                     onClick={() => router.push(`/draf`)}
                     className="font-body self-stretch py-2 px-4 border-2 text-blue-600 border-blue-600 rounded-lg hover:bg-blue-400 hover:text-white">
                     Kembali
                 </button>
-                <button
-                    onClick={() => router.push(`/draf/edit/${draft_detail.draft_id}`)}
-                    className='font-body self-stretch py-2 px-5 border-2 text-white bg-blue-600 rounded-lg hover:bg-blue-400'>
-                    Edit Draf Berita
-                </button>
+                <div className='flex flex-row gap-3'>
+                    {/* <button
+                        onClick={() => router.push('/draf/create')}
+                        className='font-body self-stretch py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400'>
+                        Buat Ulang Berita
+                    </button> */}
+                    <button
+                        onClick={() => router.push(`/draf/edit/${draft_detail.draft_id}`)}
+                        className='font-body self-stretch py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400'>
+                        Edit Draf Berita
+                    </button>
+                </div>
             </div>
         </div>
     );

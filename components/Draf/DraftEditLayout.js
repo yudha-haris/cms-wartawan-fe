@@ -9,15 +9,10 @@ import DatetimeConverter from "@/utils/datetimeConverter";
 export default function DraftEditLayout({ draft_detail }) {
 
     const [saveToNew, setSaveToNew] = useState(false);
-    const [editedContent, setEditedContent] = useState("");
+    const [editedContent, setEditedContent] = useState(draft_detail.content);
     const router = useRouter();
     const dispatch = useDispatch();
 
-    if (!draft_detail) {
-        return (<div></div>);
-    }
-
-    setEditedContent(draft_detail.content);
     const formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
 
     const handleSaveDraf = () => {
@@ -32,7 +27,9 @@ export default function DraftEditLayout({ draft_detail }) {
                 content: editedContent,
             }));
         }
+
         router.push(`/draf/${draft_detail.draft_id}`);
+
     };
 
     return (
@@ -61,15 +58,12 @@ export default function DraftEditLayout({ draft_detail }) {
                 </button>
                 <div className="flex flex-row justify-end items-center gap-5">
                     <div className="flex flex-row border-2 rounded-lg overflow-hidden">
-                        <button disabled={true}
-                            className="flex-shrink-0 z-10 inline-flex items-center py-2 px-5 text-sm 
-                                font-medium text-black text-center bg-gray-100 border border-gray-300 
-                                focus:ring-4 focus:outline-none focus:ring-gray-100">Simpan Sebagai</button>
-                        <select id="draft-save-options" value={saveToNew} onChange={setSaveToNew}
-                            className="bg-gray-50 outline-2 outline-offset-0 border-gray-300 font-body py-2 px-5
-                                text-gray-900 text-sm hover:outline-blue-500 block w-full ">
-                            <option value={false}>Draft</option>
-                            <option value={true}>New</option>
+                        <select id="draft-save-options"
+                            value={saveToNew} onChange={(selected) => setSaveToNew(selected.target.value)}
+                            className="bg-gray-50 rounded-lg border-1 border-blue 300 font-body py-2 px-5
+                                text-gray-900 text-sm hover:border-blue-500 block w-full ">
+                            <option value={false}>Simpan draf</option>
+                            <option value={true}>Simpan draf dan kirim ke redaktur</option>
                         </select>
                     </div>
                     <button

@@ -148,6 +148,24 @@ const api = (() => {
 
   }
 
+  async function recreateDraft({ id, prompt }) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/draft/recreate/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
+
+    const responseJson = await response.json();
+    return responseJson;
+
+  }
+
   async function editDraft({ id, content }) {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/draft/${id}`,
@@ -170,7 +188,7 @@ const api = (() => {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/draft/save/${id}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -225,6 +243,7 @@ const api = (() => {
     getDraftList,
     getDraftById,
     createDraft,
+    recreateDraft,
     editDraft,
     saveDraftToNew,
     getComment,
