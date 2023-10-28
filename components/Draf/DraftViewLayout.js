@@ -11,6 +11,7 @@ export default function DraftViewLayout({ draft_detail }) {
 
     useEffect(() => {
         if (draft_detail) {
+            console.log(draft_detail);
             const date_converted = DatetimeConverter({ datetime: draft_detail.created_at });
             setFormattedDate(date_converted);
         }
@@ -33,10 +34,16 @@ export default function DraftViewLayout({ draft_detail }) {
                         Dibuat pada: {formattedDate}</p>
                 </div>
             </div>
-            <Editor
+            <div className='flex flex-col h-[400px] content-font-body py-6 px-10 items-start self-stretch 
+                bg-white border-2 border-blue-400 rounded-md gap-y-2 overflow-y-auto'>
+                <p className='text-black font-body text-md'>
+                    {draft_detail.content}
+                </p>
+            </div>
+            {/* <Editor
                 className="flex flex-col h-[400px] content-font-body py-3 px-10 items-start self-stretch 
                 text-black bg-white border-2 border-blue-400 rounded-md gap-y-2 overflow-y-auto"
-                contents={draft_detail.content} />
+                contents={draft_detail.content} /> */}
             <div className='flex flex-col py-4 px-10 items-start self-stretch
                             bg-white border-2 border-blue-400 rounded-md'>
                 <p className='font-body text-md self-stretch'>Dibuat Oleh:</p>
