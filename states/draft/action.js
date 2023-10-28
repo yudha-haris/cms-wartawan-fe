@@ -101,7 +101,7 @@ function editDraft({ id, content }) {
     return async (dispatch) => {
         try {
             const draft_detail = await api.editDraft({ id, content });
-            dispatch(setEditDraftActionCreator({ draft_detail }));
+            dispatch(setEditDraftActionCreator(draft_detail));
             toast.success("Berhasil menyimpan perubahan.", {
                 position: toast.POSITION.TOP_CENTER,
             })
