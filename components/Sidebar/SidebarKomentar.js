@@ -1,7 +1,13 @@
 import { useState } from "react";
 import CardKomentar from "../Card/CardKomentar";
+import useInput from "@/hooks/useInput";
+import { createComment } from "@/states/comment/action";
+import { useDispatch } from "react-redux";
 
-export default function SidebarKomentar({ isAddable, contents }) {
+export default function SidebarKomentar({ isAddable, version_id, contents }) {
+
+    const [value, setValue] = useInput("");
+    const dispatch = useDispatch();
 
     const CARD_PLACEHOLDER = {
         author: "Nama Panjang",
@@ -9,13 +15,20 @@ export default function SidebarKomentar({ isAddable, contents }) {
         comment: "Komentar lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet.",
     }
 
+    const handleCreateComment = () => {
+        dispatch(createComment({
+            versionId: version_id,
+            content: value
+        }))
+    };
+
     return (
         <div className="flex flex-col min-h-screen w-1/4 items-center gap-10 py-20 px-10 bg-blue-900 overflow-y-auto">
             <h1 className="font-heading font-bold text-4xl text-white">Komentar</h1>
-            {isAddable
-                ? <button className="flex flex-col self-stretch items-center justify-center
-                font-body font-bold text-lg py-3 px-5 text-black bg-green-400 rounded-lg">Tambahkan Komentar</button>
-                : <></>}
+            {isAddable && <div className="flex flex-col">
+                <input value={value} onChange={setValue} placeholder="Masukkan input" />
+                <button className="" onClick={() => { handleCreateComment() }}>Buat Komentar</button>
+            </div>}
             <div className="flex flex-col items-center self-stretch gap-5 h-[720] overflow-y-auto">
                 {
                     contents

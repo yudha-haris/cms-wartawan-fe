@@ -1,21 +1,31 @@
 import { useRouter } from 'next/navigation'
 import Editor from '../Editor/Editor';
 import DatetimeConverter from '@/utils/datetimeConverter';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function DraftViewLayout({ draft_detail }) {
 
     const router = useRouter();
+    const [formattedDate, setFormattedDate] = useState('')
+
+    useEffect(() => {
+        if (draft_detail) {
+            const date_converted = DatetimeConverter({ datetime: draft_detail.created_at });
+            setFormattedDate(date_converted);
+        }
+    }, [draft_detail])
 
     if (!draft_detail) {
         return (<div></div>);
     }
 
-    const formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
+    // const formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
 
     return (
         <div className="flex flex-col items-start self-stretch py-10 px-20 gap-4 bg-blue-50 max-h-screen w-3/4">
             <div className="flex flex-col items-start gap-2 self-stretch">
-                <h1 className="font-heading text-4xl font-bold text-black">{draft_detail.title}</h1>
+                <h1 className="font-heading text-2xl font-bold text-black">{draft_detail.title}</h1>
                 <div className="flex flex-row items-center self-stretch gap-3 py-2 border-b-2 border-black">
                     <button disabled={true} className="flex items-center py-1 px-2 bg-green-400 rounded-md">
                         Status: {draft_detail.status}</button>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
 import SidebarKomentar from '@/components/Sidebar/SidebarKomentar';
 import useRequireAuth from '@/hooks/useRequireAuth';
+import { getCommentByVersionId } from '@/states/comment/action';
 
 export default function ViewDrafBeritaById() {
 
@@ -12,7 +13,7 @@ export default function ViewDrafBeritaById() {
   const { id } = router.query;
 
   const draft_detail = useSelector((state) => state.draft_detail);
-  // const comments = useSelector((state) => state.comments);
+  const comments = useSelector((state) => state.comments);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,12 +21,12 @@ export default function ViewDrafBeritaById() {
       dispatch(getDraftDetailById({ id }));
     }
 
-    // if (draft_detail) {
-    //   dispatch(getCommentByVersionId({ versionId: draft_detail.id }))
-    // }
+    if (draft_detail) {
+      dispatch(getCommentByVersionId({ versionId: draft_detail.id }))
+    }
 
-  }, [dispatch, id]);
-  // }, [dispatch, id, draft_detail]);
+    // }, [dispatch, id]);
+  }, [dispatch, id, draft_detail]);
 
   const DRAFT_PLACEHOLDER = {
     "id": 51,
@@ -51,7 +52,8 @@ export default function ViewDrafBeritaById() {
       <DraftViewLayout draft_detail={draft_detail} />
       <SidebarKomentar
         isAddable={true}
-      // contents={comments}
+        version_id={draft_detail.id}
+        contents={comments}
       />
     </main>
   );
