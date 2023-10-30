@@ -1,7 +1,6 @@
 const api = (() => {
 
-  const BASE_URL = "http://localhost:9000";
-  // const BASE_URL = "https://ta-aings-399219.uc.r.appspot.com";
+  const BASE_URL = "https://ta-aings-399219.uc.r.appspot.com";
 
   function putAccessToken(token) {
     localStorage.setItem("accessToken", token);
