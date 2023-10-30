@@ -26,7 +26,7 @@ function setCreateDraftActionCreator({ draft_detail }) {
     }
 }
 
-function setEditDraftActionCreator(draft_detail) {
+function setEditDraftActionCreator({ draft_detail }) {
     return {
         type: ActionType.EDIT_DRAFT,
         payload: {
@@ -35,7 +35,7 @@ function setEditDraftActionCreator(draft_detail) {
     }
 }
 
-function setSaveDraftActionCreator(draft_detail) {
+function setSaveDraftActionCreator({ draft_detail }) {
     return {
         type: ActionType.SAVE_DRAFT,
         payload: {
@@ -61,9 +61,7 @@ function createDraft({ prompt, onSuccess, onError }) {
     return async (dispatch) => {
         try {
             const draft_detail = await api.createDraft({ prompt });
-            dispatch(setCreateDraftActionCreator({
-                draft_detail,
-            }));
+            dispatch(setCreateDraftActionCreator({ draft_detail }));
             toast.success("Pembuatan draf berita berhasil!", {
                 position: toast.POSITION.TOP_CENTER,
             });
@@ -101,7 +99,7 @@ function editDraft({ id, content }) {
     return async (dispatch) => {
         try {
             const draft_detail = await api.editDraft({ id, content });
-            dispatch(setEditDraftActionCreator(draft_detail));
+            dispatch(setEditDraftActionCreator({ draft_detail }));
             toast.success("Berhasil menyimpan perubahan.", {
                 position: toast.POSITION.TOP_CENTER,
             })

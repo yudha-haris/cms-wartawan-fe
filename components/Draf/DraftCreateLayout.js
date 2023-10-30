@@ -3,33 +3,35 @@ import Textbox from '../Inputs/Textbox';
 import Sidebar from '../Sidebar/SidebarMain';
 import { useRouter } from 'next/navigation'
 import DraftViewAfterCreateLayout from './DraftViewAfterCreateLayout';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createDraft, recreateDraft } from '@/states/draft/action';
 import { toast } from 'react-toastify';
+import useInput from '@/hooks/useInput';
 
 export default function DraftCreateLayout() {
 
-    const router = useRouter()
-
-    const [draft, setDraft] = useState({})
-    const [prompt, setPrompt] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [isDoneGenerate, setIsDoneGenerate] = useState(false);
-
-    const PROMPT_PREPEND = "Buatkan berita mengenai ";
-
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-
+    const router = useRouter();
+    const draft_detail = useSelector((state) => state.draft_detail);
+    const is_regenerate = useSelector((state) => state.is_regenerate);
     const dispatch = useDispatch();
 
-    const handlePromptChange = (newValue) => {
-        setPrompt(newValue);
-    };
+    const [draft, setDraft] = useState({});
+    const [regenerateId, setRegenerateId] = useState(null);
+    const [prompt, handlePromptChange, setPrompt] = useInput('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [isDoneGenerate, setIsDoneGenerate] = useState(false);
+    const [isCreated, setIsCreated] = useState(false);
+    const PROMPT_PREPEND = "Buatkan berita mengenai ";
 
-    const handleStartOver = async () => {
-        setIsDoneGenerate(false);
-    }
+    useEffect(() => {
+
+        if (is_regenerate) {
+            setPrompt(draft_detail.title);
+            setRegenerateId(draft_detail.id);
+            setIsDoneGenerate(true);
+        }
+
+    }, [is_regenerate, draft_detail, setPrompt]);
 
     const handleGenerateBerita = async () => {
 
@@ -42,9 +44,10 @@ export default function DraftCreateLayout() {
             dispatch(createDraft({
                 prompt: `${PROMPT_PREPEND} ${prompt}`,
                 onSuccess: (value) => {
-                    setDraft(value);
                     setIsLoading(false);
                     setIsDoneGenerate(true);
+                    setIsCreated(true);
+                    router.push(`/draf/${value.draft_id}`);
                 },
                 onError: () => {
                     setIsLoading(false);
@@ -62,12 +65,13 @@ export default function DraftCreateLayout() {
         } else {
             setIsLoading(true);
             dispatch(recreateDraft({
-                id: draft.id,
+                id: regenerateId,
                 prompt: `${PROMPT_PREPEND} ${prompt}`,
                 onSuccess: (value) => {
-                    setDraft(value);
                     setIsLoading(false);
                     setIsDoneGenerate(true);
+                    router.push(`/draf/${value.draft_id}`);
+                    setIsCreated(true);
                 },
                 onError: () => {
                     setIsLoading(false);
@@ -97,7 +101,9 @@ export default function DraftCreateLayout() {
                     <div className="flex flex-col items-center self-stretch gap-3">
                         <Textbox
                             id="prompt"
+                            rows={4}
                             placeholder="Masukkan deskripsi berita yang ingin dibuat"
+                            value={prompt}
                             onInputChange={handlePromptChange} />
 
                         {isLoading ?
@@ -123,7 +129,8 @@ export default function DraftCreateLayout() {
                                 : <button
                                     className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
                                     onClick={handleGenerateBerita}>Buat Draf Berita</button>)
-                        } {isDoneGenerate ? (<DraftViewAfterCreateLayout title={draft.title} content={draft.content} />) : <p></p>}
+                        }
+                        {/* {isDoneGenerate ? (<DraftViewAfterCreateLayout title={draft.title} content={draft.content} />) : <p></p>} */}
 
                     </div>
 

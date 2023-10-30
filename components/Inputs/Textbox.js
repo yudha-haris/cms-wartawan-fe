@@ -1,14 +1,4 @@
-import React, { useState } from 'react';
-
-export default function Textbox({ id, placeholder, onInputChange }) {
-
-    const [inputValue, setInputValue] = useState('');
-
-    const handleInputChange = (e) => {
-        const newValue = e.target.value;
-        setInputValue(newValue);
-        onInputChange(newValue);
-    };
+export default function Textbox({ id, rows = 2, placeholder, value, onInputChange }) {
 
     return (
         <div className="flex flex-col content-start self-stretch place-items-start">
@@ -19,9 +9,9 @@ export default function Textbox({ id, placeholder, onInputChange }) {
                     block p-3 text-lg text-gray-900 bg-gray-50 rounded-md border-2 border-gray-400 
                     focus:border-2 focus:border-blue-600"
                 placeholder={placeholder}
-                rows={4}
-                value={inputValue}
-                onChange={handleInputChange}>
+                rows={rows}
+                value={value}
+                onChange={onInputChange}>
             </textarea>
         </div>
     );

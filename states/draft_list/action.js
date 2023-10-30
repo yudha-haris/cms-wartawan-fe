@@ -2,15 +2,23 @@ import { toast } from "react-toastify";
 const { default: api } = require("@/utils/api");
 
 const ActionType = {
-    GET_DRAFT_LIST: "GET_DRAFT_LIST",
+    SET_DRAFT_LIST: "SET_DRAFT_LIST",
+    UNSET_DRAFT_LIST: "UNSET_DRAFT_LIST",
 };
 
-function setGetDraftListActionCreator({ draft_list_info }) {
+function setDraftListActionCreator({ draft_list_info }) {
     return {
-        type: ActionType.GET_DRAFT_LIST,
+        type: ActionType.SET_DRAFT_LIST,
         payload: {
             draft_list_info
         },
+    };
+}
+
+function unsetDraftListActionCreator() {
+    return {
+        type: ActionType.SET_DRAFT_LIST,
+        payload: null,
     };
 }
 
@@ -18,7 +26,7 @@ function getDraftList({ page, limit, onSuccess }) {
     return async (dispatch) => {
         try {
             const response = await api.getDraftList({ page, limit });
-            dispatch(setGetDraftListActionCreator({
+            dispatch(setDraftListActionCreator({
                 draft_list_info: response
             }));
             onSuccess(response);
@@ -30,8 +38,22 @@ function getDraftList({ page, limit, onSuccess }) {
     }
 }
 
+function emptyDraftList() {
+    return async (dispatch) => {
+        try {
+            dispatch(unsetDraftListActionCreator())
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            })
+        }
+    }
+}
+
 export {
     ActionType,
-    setGetDraftListActionCreator,
+    setDraftListActionCreator,
+    unsetDraftListActionCreator,
     getDraftList,
+    emptyDraftList,
 }

@@ -48,7 +48,7 @@ export default function Overview() {
             </div>
             <div className='flex flex-col py-3 self-stretch items-start content-start'>
               {(draft_list.draft_berita).map((draft) => (
-                <ListItem key={draft.draft_id} title={draft.title} time={draft.created_at}
+                <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
                   onClick={() => handleViewDraf(draft.draft_id)} />
               ))}
             </div>

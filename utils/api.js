@@ -8,7 +8,6 @@ const api = (() => {
   }
 
   function getAccessToken() {
-    // console.log(localStorage.getItem("accessToken"));
     return localStorage.getItem("accessToken");
   }
 

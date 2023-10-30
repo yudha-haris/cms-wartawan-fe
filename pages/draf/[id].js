@@ -6,8 +6,11 @@ import { getDraftDetailById } from '@/states/draft/action';
 import SidebarKomentar from '@/components/Sidebar/SidebarKomentar';
 import useRequireAuth from '@/hooks/useRequireAuth';
 import { getCommentByVersionId } from '@/states/comment/action';
+import SidebarDraf from '@/components/Sidebar/SidebarDraf';
 
 export default function ViewDrafBeritaById() {
+
+  console.log("ini di page view draft")
 
   const router = useRouter();
   const { id } = router.query;
@@ -19,13 +22,13 @@ export default function ViewDrafBeritaById() {
   useEffect(() => {
     if (id) {
       dispatch(getDraftDetailById({ id }));
+      // dispatch(getCommentByVersionId({ versionId: draft_detail.id }))
     }
 
     if (draft_detail) {
       dispatch(getCommentByVersionId({ versionId: draft_detail.id }))
     }
 
-    // }, [dispatch, id]);
   }, [dispatch, id, draft_detail]);
 
   const DRAFT_PLACEHOLDER = {
@@ -48,13 +51,14 @@ export default function ViewDrafBeritaById() {
   }
 
   return (
-    <main className='flex flex-row items-start min-h-screen w-full'>
+    <main className='flex flex-row items-start max-h-screen w-full'>
       <DraftViewLayout draft_detail={draft_detail} />
-      <SidebarKomentar
+      <SidebarDraf draft_detail={draft_detail} comments={comments} />
+      {/* <SidebarKomentar
         isAddable={true}
         version_id={draft_detail.id}
         contents={comments}
-      />
+      /> */}
     </main>
   );
 

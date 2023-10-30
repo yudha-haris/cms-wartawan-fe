@@ -3,7 +3,7 @@ import Sidebar from "@/components/Sidebar/SidebarMain";
 import ListItem from "@/components/ListItem/ListItem";
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
-import { getDraftList } from '@/states/draft_list/action';
+import { emptyDraftList, getDraftList } from '@/states/draft_list/action';
 
 export default function DraftListLayout() {
 
@@ -12,8 +12,8 @@ export default function DraftListLayout() {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
-  const draft_list = useSelector((state) => state.draft_list);
   const dispatch = useDispatch();
+  const draft_list = useSelector((state) => state.draft_list);
 
   useEffect(() => {
     dispatch(getDraftList({
@@ -23,6 +23,8 @@ export default function DraftListLayout() {
       },
     }));
   }, [dispatch, page]);
+
+  console.log(draft_list);
 
   const handleViewDraf = (id) => {
     router.push(`/draf/${id}`)
@@ -58,22 +60,22 @@ export default function DraftListLayout() {
 
           <div className='flex flex-col items-start self-stretch overflow-y-auto'>
             {(draft_list.draft_berita).map((draft) => (
-              <ListItem key={draft.draft_id} title={draft.title} time={draft.created_at}
+              <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
                 onClick={() => handleViewDraf(draft.draft_id)} />
             ))}
           </div>
 
-          <div className='flex flex-row pt-3 pb-5 gap-5 items-center self-stretch justify-center'>
+          <div className='flex flex-row py-5 gap-5 items-center self-stretch justify-center border-t-2 border-gray-200'>
             <p className={(page === 1)
               ? 'font-body font-bold'
               : 'font-body font-bold hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
-              onClick={handlePrevPage}>Prev</p>
+              onClick={handlePrevPage}>Sebelumnya</p>
             <p className='font-body font-bold'>
               <span className='text-blue-600'>{page}</span>/{totalPage}</p>
             <p className={(page === totalPage)
               ? 'font-body font-bold'
               : 'font-body font-bold hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
-              onClick={handleNextPage}>Next</p>
+              onClick={handleNextPage}>Berikutnya</p>
           </div>
 
         </div>

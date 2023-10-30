@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
 import Editor from "../Editor/Editor";
-import useInput from "@/hooks/useInput";
 import { editDraft, saveDraftToNew } from "@/states/draft/action";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DatetimeConverter from "@/utils/datetimeConverter";
+import "@mdxeditor/editor/style.css";
 
 export default function DraftEditLayout({ draft_detail }) {
 
@@ -14,12 +14,6 @@ export default function DraftEditLayout({ draft_detail }) {
     const dispatch = useDispatch();
 
     const formattedDate = DatetimeConverter({ datetime: draft_detail.created_at });
-
-    useEffect(() => {
-        console.log('mememememem');
-        console.log(draft_detail);
-
-    }, [draft_detail]);
 
     const handleSaveDraf = () => {
         if (saveToNew) {

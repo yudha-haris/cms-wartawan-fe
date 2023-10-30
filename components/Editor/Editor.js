@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { MDXEditor } from "@mdxeditor/editor/MDXEditor";
 import { UndoRedo } from "@mdxeditor/editor/plugins/toolbar/components/UndoRedo";
 import { BoldItalicUnderlineToggles } from "@mdxeditor/editor/plugins/toolbar/components/BoldItalicUnderlineToggles";
@@ -15,10 +15,10 @@ const Editor = ({ contents, onChange = "", className }) => {
       plugins={onChange && [
         toolbarPlugin({
           toolbarContents: () => (
-            <div className="flex flex-row contents-start py-12 px-12 self-stretch w-fit h-12 bg-blue-100 overflow-visible">
+            <>
               <UndoRedo />
               <BoldItalicUnderlineToggles />
-            </div>
+            </>
           ),
         }),
       ]

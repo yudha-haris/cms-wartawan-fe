@@ -1,14 +1,5 @@
-import React, { useState } from 'react';
-export default function InputText({id, type, value, placeholder, onInputChange}) {
-    
-    // const [inputValue, setInputValue] = useState('');
+export default function InputText({ id, type, placeholder, value, onInputChange }) {
 
-    // const handleInputChange = (e) => {
-    //     const newValue = e.target.value;
-    //     setInputValue(newValue);
-    //     onInputChange(newValue);
-    // };
-    
     return (
         <div className="flex flex-col content-start self-stretch place-items-start">
             <input
@@ -21,7 +12,7 @@ export default function InputText({id, type, value, placeholder, onInputChange})
                 placeholder={placeholder}
                 value={value}
                 onChange={onInputChange}>
-            </input>  
+            </input>
         </div>
     );
 }
