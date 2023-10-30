@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import DraftEditLayout from "@/components/Draf/DraftEditLayout";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
-import SidebarKomentar from '@/components/Sidebar/SidebarKomentar';
 import useRequireAuth from '@/hooks/useRequireAuth';
+import SidebarDraf from '@/components/Sidebar/SidebarDraf';
+import { getCommentByVersionId } from '@/states/comment/action';
+import useInput from '@/hooks/useInput';
 
 export default function EditDrafBeritaById() {
 
@@ -12,14 +14,25 @@ export default function EditDrafBeritaById() {
   const { id } = router.query;
 
   const draft_detail = useSelector((state) => state.draft_detail);
+  const comments = useSelector((state) => state.comments);
   const dispatch = useDispatch();
 
+  const [editedContent, handleEditedContentChange, setEditedContent] = useInput("");
+
   useEffect(() => {
-    if (id) {
-      dispatch(getDraftDetailById({ id }));
+    // if (id) {
+    //   dispatch(getDraftDetailById({ id }));
+    // }
+
+    // console.log(draft_detail);
+
+    if (draft_detail) {
+      dispatch(getCommentByVersionId({ versionId: draft_detail.id }))
+      setEditedContent(draft_detail.content);
+      // console.log(editedContent);
     }
 
-  }, [dispatch, id]);
+  }, [dispatch, draft_detail, setEditedContent, editedContent]);
 
   const DRAFT_PLACEHOLDER = {
     "id": 51,
@@ -41,9 +54,17 @@ export default function EditDrafBeritaById() {
   }
 
   return (
-    <main className='flex flex-row items-start min-h-screen w-full'>
-      <DraftEditLayout draft_detail={draft_detail} />
-      <SidebarKomentar isAddable={false} />
+    <main className='flex flex-row items-start max-h-screen w-full'>
+      <DraftEditLayout
+        draft_detail={draft_detail}
+      // editedContent={editedContent}
+      // handleEditedContentChange={handleEditedContentChange} 
+      />
+      {/* <SidebarDraf
+        draft_detail={draft_detail}
+        comments={comments}
+        isEditing={true}
+        editedContent={editedContent} /> */}
     </main>
   );
 }

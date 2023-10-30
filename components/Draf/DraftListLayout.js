@@ -24,8 +24,6 @@ export default function DraftListLayout() {
     }));
   }, [dispatch, page]);
 
-  console.log(draft_list);
-
   const handleViewDraf = (id) => {
     router.push(`/draf/${id}`)
   };

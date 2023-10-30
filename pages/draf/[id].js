@@ -3,14 +3,11 @@ import { useEffect, useState } from 'react';
 import DraftViewLayout from "@/components/Draf/DraftViewLayout";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById } from '@/states/draft/action';
-import SidebarKomentar from '@/components/Sidebar/SidebarKomentar';
 import useRequireAuth from '@/hooks/useRequireAuth';
 import { getCommentByVersionId } from '@/states/comment/action';
 import SidebarDraf from '@/components/Sidebar/SidebarDraf';
 
 export default function ViewDrafBeritaById() {
-
-  console.log("ini di page view draft")
 
   const router = useRouter();
   const { id } = router.query;
@@ -22,7 +19,6 @@ export default function ViewDrafBeritaById() {
   useEffect(() => {
     if (id) {
       dispatch(getDraftDetailById({ id }));
-      // dispatch(getCommentByVersionId({ versionId: draft_detail.id }))
     }
 
     if (draft_detail) {
@@ -53,12 +49,7 @@ export default function ViewDrafBeritaById() {
   return (
     <main className='flex flex-row items-start max-h-screen w-full'>
       <DraftViewLayout draft_detail={draft_detail} />
-      <SidebarDraf draft_detail={draft_detail} comments={comments} />
-      {/* <SidebarKomentar
-        isAddable={true}
-        version_id={draft_detail.id}
-        contents={comments}
-      /> */}
+      <SidebarDraf draft_detail={draft_detail} comments={comments} isEditing={false} />
     </main>
   );
 

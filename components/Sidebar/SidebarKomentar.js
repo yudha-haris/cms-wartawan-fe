@@ -24,7 +24,7 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
     };
 
     return (
-        <div className="flex flex-col self-stretch items-center gap-10 py-5 px-5 bg-blue-900 h-fit">
+        <div className="flex flex-col self-stretch items-center gap-10 py-5 px-5 h-fit">
             {isAddable &&
                 <div className="flex flex-col items-center self-stretch gap-2">
                     <Textbox
@@ -36,7 +36,7 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
                     <button className="font-body self-stretch py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
                         onClick={() => { handleCreateComment() }}>Buat Komentar</button>
                 </div>}
-            <div className="flex flex-col items-center self-stretch gap-5 h-[720] overflow-y-auto">
+            <div className="flex flex-col items-center self-stretch gap-5 h-fit overflow-y-auto">
                 {
                     contents
                         ? contents.map((comment) => (
@@ -48,7 +48,7 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
                                 time={DatetimeConverter({ datetime: comment.created_at })}
                                 comment={comment.content} />
                         ))
-                        : <p className="font-body text-xl text-white py-2 px-4">Belum ada Komentar</p>
+                        : <p className="font-body text-xl text-black py-2 px-4">Belum ada Komentar</p>
 
                 }
             </div>
