@@ -4,7 +4,6 @@ import { editDraft, saveDraftToNew } from "@/states/draft/action";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DatetimeConverter from "@/utils/datetimeConverter";
-import "@mdxeditor/editor/style.css";
 
 export default function DraftEditLayout({ draft_detail }) {
 

@@ -3,7 +3,7 @@ import Sidebar from "@/components/Sidebar/SidebarMain";
 import ListItem from "@/components/ListItem/ListItem";
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
-import { emptyDraftList, getDraftList } from '@/states/draft_list/action';
+import { getDraftList } from '@/states/draft_list/action';
 
 export default function DraftListLayout() {
 
