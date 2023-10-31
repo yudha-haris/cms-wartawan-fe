@@ -3,8 +3,8 @@ export default function StatusConverter({ status }) {
     const STATUS = {
         "draft": "Draf",
         "new": "Dikirim ke Redaktur",
-        "reviewing": "Disunting Redaktur",
-        "reviewed": "Di-review Redaktur",
+        "reviewing": "Sedang disunting Redaktur",
+        "reviewed": "Sudah di-review Redaktur",
         "approved": "Disetujui",
         "rejected": "Ditolak",
         "published": "Dipublikasikan",
