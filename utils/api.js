@@ -202,6 +202,21 @@ const api = (() => {
 
   }
 
+  async function saveDraftToApproved({ id }) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/draft/approve/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+    const responseJson = await response.json();
+    return responseJson;
+
+  }
+
   async function getComment({ versionId }) {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/comment/${versionId}`,
@@ -246,6 +261,7 @@ const api = (() => {
     recreateDraft,
     editDraft,
     saveDraftToNew,
+    saveDraftToApproved,
     getComment,
     createComment,
   };

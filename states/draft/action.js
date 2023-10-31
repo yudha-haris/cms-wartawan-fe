@@ -116,7 +116,7 @@ function saveDraftToNew({ id, content }) {
         try {
             const draft_detail = await api.saveDraftToNew({ id, content });
             dispatch(setSaveDraftActionCreator({ draft_detail }));
-            toast.success("Berhasil menyimpan perubahan dan mengubah status draf berita.", {
+            toast.success("Berhasil mengirim ke redaktur!", {
                 position: toast.POSITION.TOP_CENTER,
             })
         } catch (error) {
@@ -126,6 +126,23 @@ function saveDraftToNew({ id, content }) {
         }
     }
 }
+
+function saveDraftToApproved({ id }) {
+    return async (dispatch) => {
+        try {
+            const draft_detail = await api.saveDraftToApproved({ id });
+            dispatch(setSaveDraftActionCreator({ draft_detail }));
+            toast.success("Berhasil menyetujui review berita!", {
+                position: toast.POSITION.TOP_CENTER,
+            })
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        }
+    }
+}
+
 
 export {
     ActionType,
@@ -137,4 +154,5 @@ export {
     recreateDraft,
     editDraft,
     saveDraftToNew,
+    saveDraftToApproved,
 }

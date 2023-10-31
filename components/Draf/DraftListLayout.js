@@ -17,7 +17,7 @@ export default function DraftListLayout() {
 
   useEffect(() => {
     dispatch(getDraftList({
-      "page": page, "limit": 8,
+      "page": page, "limit": 6,
       onSuccess: (value) => {
         setTotalPage(value.total_pages);
       },

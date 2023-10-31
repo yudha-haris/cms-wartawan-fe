@@ -14,7 +14,9 @@ export default function SidebarDraf({ draft_detail, comments, isEditing, editedC
                 <button className={showComments
                     ? "flex flex-1 self-stretch items-center justify-center py-3 font-body font-bold text-black"
                     : "flex flex-1 self-stretch items-center justify-center py-3 font-body font-bold text-black bg-stone-200"}
-                    onClick={() => { setShowComments(false) }}>Detail Draf</button>
+                    onClick={() => { setShowComments(false) }}>
+                    {((draft_detail.status).toLowerCase() === "published") ? "Detail Berita" : "Detail Draf"}
+                </button>
                 {(((draft_detail.status).toLowerCase() === "reviewed") || ((draft_detail.status).toLowerCase() === "rejected"))
                     && <button className={showComments
                         ? "flex flex-1 self-stretch items-center justify-center py-3 font-body font-bold text-black bg-stone-200"

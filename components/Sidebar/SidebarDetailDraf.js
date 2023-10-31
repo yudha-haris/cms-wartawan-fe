@@ -1,4 +1,4 @@
-import { editDraft, saveDraftToNew } from "@/states/draft/action";
+import { editDraft, saveDraftToApproved, saveDraftToNew } from "@/states/draft/action";
 import { setIsRegenerate } from "@/states/regenerate/action";
 import DatetimeConverter from "@/utils/datetimeConverter";
 import StatusConverter from "@/utils/statusConverter";
@@ -22,10 +22,15 @@ export default function SidebarDetailDraf({ draft_detail, isEditing, editedConte
     };
 
     const handleSaveDraf = () => {
-        console.log("kepencet");
         dispatch(saveDraftToNew({
             id: draft_detail.id,
             content: editedContent,
+        }));
+    }
+
+    const handleApproveDraf = () => {
+        dispatch(saveDraftToApproved({
+            id: draft_detail.id,
         }));
     }
 
@@ -69,6 +74,15 @@ export default function SidebarDetailDraf({ draft_detail, isEditing, editedConte
                             Buat Ulang Draf Berita
                         </button>
                     </div>))
+            }
+
+            {((draft_detail.status).toLowerCase() === "reviewed")
+                && (<button
+                    onClick={() => handleApproveDraf()}
+                    className="flex flex-1 self-stretch items-center justify-center font-body font-bold text-white
+                        text-md py-2 px-5 bg-blue-600 rounded-lg hover:bg-blue-400">
+                    Beri persetujuan untuk publikasi
+                </button>)
             }
 
         </div>
