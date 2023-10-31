@@ -40,7 +40,7 @@ function createComment({ versionId, content }) {
                 versionId,
                 comments,
             }));
-            toast.success("Sukses", {
+            toast.success("Berhasil membuat komentar", {
                 position: toast.POSITION.TOP_CENTER,
             });
         } catch (error) {

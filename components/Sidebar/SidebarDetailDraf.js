@@ -43,14 +43,14 @@ export default function SidebarDetailDraf({ draft_detail, isEditing, editedConte
                 </div>
             </div>
 
-            {
-                isEditing
-                    ? <button onClick={() => handleEditDraf()}
+            {((draft_detail.status).toLowerCase() === "draft")
+                && (isEditing
+                    ? (<button onClick={() => handleEditDraf()}
                         className="flex flex-1 self-stretch items-center justify-center font-body font-bold text-white
                                 text-md py-2 px-5 bg-blue-600 rounded-lg hover:bg-blue-400">
                         Simpan Perubahan
-                    </button>
-                    : <div className="flex flex-1 flex-col gap-3 items-start self-stretch">
+                    </button>)
+                    : (<div className="flex flex-1 flex-col gap-3 items-start self-stretch">
                         <div className="flex flex-1 flex-row gap-3 justify-center items-start self-stretch">
                             <button onClick={() => router.push(`/draf/edit/${draft_detail.draft_id}`)}
                                 className="flex flex-1 self-stretch items-center justify-center font-body font-bold text-white
@@ -68,7 +68,7 @@ export default function SidebarDetailDraf({ draft_detail, isEditing, editedConte
                                     text-md py-2 px-3 border-2 border-blue-600 rounded-lg hover:bg-blue-400 hover:text-white">
                             Buat Ulang Draf Berita
                         </button>
-                    </div>
+                    </div>))
             }
 
         </div>

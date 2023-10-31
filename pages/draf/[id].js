@@ -2,10 +2,11 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import DraftViewLayout from "@/components/Draf/DraftViewLayout";
 import { useDispatch, useSelector } from 'react-redux';
-import { getDraftDetailById } from '@/states/draft/action';
+import { getDraftDetailById, getDraftDetailRedakturById } from '@/states/draft/action';
 import useRequireAuth from '@/hooks/useRequireAuth';
 import { getCommentByVersionId } from '@/states/comment/action';
 import SidebarDraf from '@/components/Sidebar/SidebarDraf';
+import { setIsLoading } from '@/states/loading/action';
 
 export default function ViewDrafBeritaById() {
 
@@ -22,7 +23,7 @@ export default function ViewDrafBeritaById() {
     }
 
     if (draft_detail) {
-      dispatch(getCommentByVersionId({ versionId: draft_detail.id }))
+      dispatch(getCommentByVersionId({ versionId: draft_detail.id }));
     }
 
   }, [dispatch, id, draft_detail]);
@@ -42,8 +43,9 @@ export default function ViewDrafBeritaById() {
     "id_validasi": null
   }
 
+
   if (!draft_detail) {
-    return (<div></div>)
+    return (<div></div>);
   }
 
   return (
