@@ -34,31 +34,8 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
 
     return (
         <div className="flex flex-col self-stretch items-center gap-10 py-5 px-5 h-fit">
-            {isAddable &&
-                <div className="flex flex-col items-center self-stretch gap-2">
-                    <Textbox
-                        id="prompt"
-                        rows={1}
-                        placeholder="Berikan Komentar"
-                        value={commentContent}
-                        onInputChange={setCommentContent} />
-                    <button className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
-                        onClick={() => { handleCreateComment() }}>Buat Komentar</button>
-                </div>}
+
             <div className="flex flex-col items-center self-stretch gap-2 h-fit overflow-y-auto">
-                {/* {
-                    comments_fecthed
-                        ? comments_fecthed.map((comment) => (
-                            < CardKomentar
-                                key={comment.id}
-                                author={(comment.user_wartawan)
-                                    ? (comment.user_wartawan.username)
-                                    : (comment.user_redaktur.username)}
-                                time={DatetimeConverter({ datetime: comment.created_at })}
-                                comment={comment.content} />
-                        ))
-                        : <p className="font-body text-xl text-black py-2 px-4">Belum ada Komentar</p>
-                } */}
                 {
                     contents
                         ? contents.map((comment) => (
@@ -73,6 +50,19 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
                         : <p className="font-body text-xl text-black py-2 px-4">Belum ada Komentar</p>
                 }
             </div>
+
+            {isAddable &&
+                <div className="flex flex-col items-center self-stretch gap-2">
+                    <Textbox
+                        id="prompt"
+                        rows={1}
+                        placeholder="Berikan Komentar"
+                        value={commentContent}
+                        onInputChange={setCommentContent} />
+                    <button className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
+                        onClick={() => { handleCreateComment() }}>Buat Komentar</button>
+                </div>}
+
         </div>
     );
 }

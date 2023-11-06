@@ -66,13 +66,13 @@ export default function DraftListLayout() {
           <div className='flex flex-row py-5 gap-5 items-center self-stretch justify-center border-t-2 border-gray-200'>
             <p className={(page === 1)
               ? 'font-body font-bold'
-              : 'font-body font-bold hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
+              : 'font-body font-bold text-black hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
               onClick={handlePrevPage}>Sebelumnya</p>
             <p className='font-body font-bold'>
               <span className='text-blue-600'>{page}</span>/{totalPage}</p>
             <p className={(page === totalPage)
               ? 'font-body font-bold'
-              : 'font-body font-bold hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
+              : 'font-body font-bold text-black hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
               onClick={handleNextPage}>Berikutnya</p>
           </div>
 

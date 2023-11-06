@@ -39,12 +39,12 @@ export default function SidebarDetailDraf({ draft_detail, isEditing, editedConte
 
             <div className="flex flex-col gap-2 self-stretch">
                 <div className="flex flex-col items-start">
-                    <p className="font-body font-bold text-md">{(draft_detail.status === "draft") ? "Dibuat pada" : "Diubah pada"}</p>
-                    <p className="font-body text-lg">{formattedDate}</p>
+                    <p className="font-body font-bold text-md text-black">{(draft_detail.status === "draft") ? "Dibuat pada" : "Diubah pada"}</p>
+                    <p className="font-body text-lg text-black">{formattedDate}</p>
                 </div>
                 <div className="flex flex-col items-start">
-                    <p className="font-body font-bold text-md">Status</p>
-                    <p className="font-body text-lg">{formattedStatus}</p>
+                    <p className="font-body font-bold text-md text-black">Status</p>
+                    <p className="font-body text-lg text-black">{formattedStatus}</p>
                 </div>
             </div>
 

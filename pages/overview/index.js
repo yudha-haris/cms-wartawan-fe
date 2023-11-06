@@ -18,7 +18,7 @@ export default function Overview() {
 
   useEffect(() => {
     dispatch(getDraftList({
-      "page": 1, "limit": 3,
+      "page": 1, "limit": 2,
       onSuccess: (value) => {
         setTotalPage(value.total_pages);
       },
@@ -40,9 +40,10 @@ export default function Overview() {
 
       <div className='flex flex-col items-start content-start p-20 w-4/5 '>
         <h1 className='font-heading text-5xl font-bold pb-8 self-stretch text-black'>Overview</h1>
-        <div className='flex flex-row self-stretch gap-8'>
 
-          <div className='flex flex-col w-2/3 rounded-md bg-white border-2 border-blue-400 overflow-hidden'>
+        <div className='flex flex-col self-stretch gap-2'>
+
+          <div className='flex flex-col rounded-md bg-white border-2 border-blue-400 overflow-hidden'>
             <div className='flex flex-col py-5 px-8 bg-blue-200'>
               <h1 className='font-heading text-xl font-bold self-stretch text-black'>Draf Berita Terbaru</h1>
             </div>
@@ -54,13 +55,15 @@ export default function Overview() {
             </div>
           </div>
 
-          <div className='flex flex-col w-1/3 rounded-md gap-4 bg-white border-2 border-blue-400 overflow-hidden'>
+          <div className='flex flex-col rounded-md bg-white border-2 border-blue-400 overflow-hidden'>
             <div className='flex flex-col py-5 px-8 bg-blue-200'>
-              <h1 className='font-heading text-xl font-bold self-stretch text-black'>Notifikasi</h1>
+              <h1 className='font-heading text-xl font-bold self-stretch text-black'>Aktivitas Terbaru</h1>
             </div>
-            <p className='font-body text-md py-5 px-8 italic text-black self-center'>Belum ada kabar terbaru.</p>
+            <p className='font-body text-md py-5 px-8 italic text-black self-center'>Belum ada aktivitas terbaru.</p>
           </div>
+
         </div>
+
       </div>
 
     </main>

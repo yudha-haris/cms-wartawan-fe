@@ -24,7 +24,7 @@ export default function Sidebar() {
                     <p className="font-body text-lg py-2 px-3 self-stretch text-white">Buat Draf Berita</p>
                 </div>
                 <div className="self-stretch hover:bg-blue-950 hover:cursor-pointer" onClick={() => { dispatch(logout()) }}>
-                    <p className="font-body text-lg py-2 px-3 self-stretch text-white">Log out</p>
+                    <p className="font-body text-lg py-2 px-3 self-stretch text-white">Keluar</p>
                 </div>
             </div>
         </div>

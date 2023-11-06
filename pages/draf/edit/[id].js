@@ -54,7 +54,7 @@ export default function EditDrafBeritaById() {
   }
 
   return (
-    <main className='flex flex-row items-start max-h-screen w-full'>
+    <main className='flex flex-row items-start min-h-screen w-full'>
       <DraftEditLayout
         draft_detail={draft_detail}
       // editedContent={editedContent}

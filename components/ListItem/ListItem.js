@@ -1,10 +1,10 @@
-import DatetimeConverter from "@/utils/datetimeConverter";
+import DateTimeConverter from "@/utils/datetimeConverter";
 import StatusConverter from "@/utils/statusConverter";
 
 export default function ListItem({ title, status, time, onClick }) {
 
     const formattedStatus = StatusConverter({ status });
-    const formattedDate = DatetimeConverter({ datetime: time });
+    const formattedDate = DateTimeConverter({ datetime: time });
 
     return (
         <div onClick={() => onClick()}

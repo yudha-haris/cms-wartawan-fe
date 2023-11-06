@@ -1,34 +1,30 @@
-export default function DatetimeConverter({ datetime }) {
+export default function DateTimeConverter({ datetime }) {
+    const date = new Date(datetime);
 
-    var timestamp = new Date(datetime);
-    var formattedDate = timestamp.toLocaleString();
+    // Define the names of days and months in Indonesian
+    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 
-    // 1/10/2023, 21.54.32
-    var date_and_time = formattedDate.split(", ");
-    var date = date_and_time[0];
-    var time = date_and_time[1];
+    const months = [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+    ];
 
-    var date_splitted = date.split("/");
+    const dayName = days[date.getUTCDay()];
+    const dayOfMonth = date.getUTCDate();
+    const monthName = months[date.getUTCMonth()];
+    const year = date.getUTCFullYear();
+    const hour = date.getUTCHours();
+    const minute = (date.getUTCMinutes() < 10 ? "0" : "") + date.getUTCMinutes();
 
-    const MONTH = {
-        1: "Januari",
-        2: "Februari",
-        3: "Maret",
-        4: "April",
-        5: "Mei",
-        6: "Juni",
-        7: "Juli",
-        8: "Agustus",
-        9: "September",
-        10: "Oktober",
-        11: "November",
-        12: "Desember",
-    };
-
-    var result_date = `${date_splitted[0]} ${MONTH[Number(date_splitted[1])]} ${date_splitted[2]}`;
-    var result_time = time.slice(0, 5);
-
-    var result = `${result_time}, ${result_date}`
-
-    return result;
+    return `${hour}:${minute}, ${dayOfMonth} ${monthName} ${year}`;
 }
