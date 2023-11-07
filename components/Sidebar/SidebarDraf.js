@@ -7,7 +7,7 @@ export default function SidebarDraf({ draft_detail, comments, isEditing, editedC
     const [showComments, setShowComments] = useState(false);
 
     return (
-        <div className="flex flex-col max-h-screen w-1/4 items-center gap-10 py-20 bg-stone-50 self-stretch border-l-4 border-gray-200">
+        <div className="flex flex-col max-h-screen w-1/4 items-center gap-5 pt-12 pb-5 bg-stone-50 self-stretch border-l-4 border-gray-200 overflow-auto">
             <h1 className="font-heading font-bold text-4xl text-black">AINGS</h1>
 
             <div className="flex flex-row justify-center items-start self-stretch border-b-2 border-gray-400">

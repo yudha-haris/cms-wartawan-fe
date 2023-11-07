@@ -31,7 +31,7 @@ function getCommentByVersionId({ versionId }) {
     }
 }
 
-function createComment({ versionId, content }) {
+function createComment({ versionId, content, onSuccess, onError }) {
     return async (dispatch) => {
         try {
             const createdComment = await api.createComment({ versionId, content });
@@ -43,10 +43,12 @@ function createComment({ versionId, content }) {
             toast.success("Berhasil membuat komentar", {
                 position: toast.POSITION.TOP_CENTER,
             });
+            onSuccess();
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             });
+            onError();
         }
     }
 }
