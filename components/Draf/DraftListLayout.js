@@ -4,6 +4,7 @@ import ListItem from "@/components/ListItem/ListItem";
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftList } from '@/states/draft_list/action';
+import ReactLoading from 'react-loading';
 
 export default function DraftListLayout() {
 
@@ -11,15 +12,18 @@ export default function DraftListLayout() {
 
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true)
 
   const dispatch = useDispatch();
   const draft_list = useSelector((state) => state.draft_list);
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(getDraftList({
       "page": page, "limit": 6,
       onSuccess: (value) => {
         setTotalPage(value.total_pages);
+        setIsLoading(false)
       },
     }));
   }, [dispatch, page]);
@@ -56,12 +60,19 @@ export default function DraftListLayout() {
             <h1 className='font-heading text-xl font-bold self-stretch text-black'>Semua Draf Berita</h1>
           </div>
 
-          <div className='flex flex-col items-start self-stretch overflow-y-auto'>
-            {(draft_list.draft_berita).map((draft) => (
-              <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
-                onClick={() => handleViewDraf(draft.draft_id)} />
-            ))}
-          </div>
+          {
+            isLoading
+              ? <div className='flex flex-1 flex-col items-center self-stretch overflow-y-auto p-10'>
+                <ReactLoading type={"spin"} color={"blue"} height={'10%'} width={'10%'} />
+              </div>
+              : <div className='flex flex-col items-start self-stretch overflow-y-auto'>
+                {(draft_list.draft_berita).map((draft) => (
+                  <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
+                    onClick={() => handleViewDraf(draft.draft_id)} />
+                ))}
+              </div>
+          }
+
 
           <div className='flex flex-row py-5 gap-5 items-center self-stretch justify-center border-t-2 border-gray-200'>
             <p className={(page === 1)

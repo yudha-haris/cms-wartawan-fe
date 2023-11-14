@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import useRequireAuth from '@/hooks/useRequireAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftList } from '@/states/draft_list/action';
+import ReactLoading from 'react-loading';
 
 export default function Overview() {
 
@@ -15,12 +16,15 @@ export default function Overview() {
   const dispatch = useDispatch();
 
   const [totalPage, setTotalPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(getDraftList({
       "page": 1, "limit": 2,
       onSuccess: (value) => {
         setTotalPage(value.total_pages);
+        setIsLoading(false);
       },
     }));
   }, [dispatch]);
@@ -47,12 +51,17 @@ export default function Overview() {
             <div className='flex flex-col py-5 px-8 bg-blue-200'>
               <h1 className='font-heading text-xl font-bold self-stretch text-black'>Draf Berita Terbaru</h1>
             </div>
-            <div className='flex flex-col py-3 self-stretch items-start content-start'>
-              {(draft_list.draft_berita).map((draft) => (
-                <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
-                  onClick={() => handleViewDraf(draft.draft_id)} />
-              ))}
-            </div>
+            {
+              isLoading
+                ? <div className='flex flex-1 flex-col items-center self-stretch overflow-y-auto p-10'>
+                  <ReactLoading type={"spin"} color={"blue"} height={'10%'} width={'10%'} />
+                </div>
+                : <div className='flex flex-col py-3 self-stretch items-start content-start'>
+                  {(draft_list.draft_berita).map((draft) => (
+                    <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
+                      onClick={() => handleViewDraf(draft.draft_id)} />
+                  ))}
+                </div>}
           </div>
 
           <div className='flex flex-col rounded-md bg-white border-2 border-blue-400 overflow-hidden'>
