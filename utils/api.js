@@ -1,6 +1,6 @@
 const api = (() => {
 
-  const BASE_URL = "https://ta-aings-399219.uc.r.appspot.com";
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
   function putAccessToken(token) {
     localStorage.setItem("accessToken", token);
