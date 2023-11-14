@@ -34,7 +34,7 @@ function setLogoutActionCreator() {
     }
 }
 
-function register({ email, username, password, onSuccess }) {
+function register({ email, username, password, onSuccess, onError }) {
     return async (dispatch) => {
         try {
             if (!(email !== "" && username !== "" && password !== "")) {
@@ -53,6 +53,7 @@ function register({ email, username, password, onSuccess }) {
             }
 
         } catch (error) {
+            onError();
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             });
@@ -60,7 +61,7 @@ function register({ email, username, password, onSuccess }) {
     }
 }
 
-function login({ email, username, password, onSuccess }) {
+function login({ email, username, password, onSuccess, onError }) {
     return async (dispatch) => {
         try {
             if (email) {
@@ -81,6 +82,7 @@ function login({ email, username, password, onSuccess }) {
             onSuccess();
 
         } catch (error) {
+            onError();
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             })
