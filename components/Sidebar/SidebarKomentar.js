@@ -60,7 +60,7 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
                     //     ))
                     //     : <p className="font-body text-xl text-black py-2 px-4">Belum ada Komentar</p>
 
-                    (contents.length == 0)
+                    (contents.length === 0)
                         ? <p className="font-body font-bold text-xl text-black py-6 px-4">Belum ada Komentar</p>
                         : contents.map((comment) => (
                             < CardKomentar

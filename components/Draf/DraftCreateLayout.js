@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createDraft, recreateDraft } from '@/states/draft/action';
 import { toast } from 'react-toastify';
 import useInput from '@/hooks/useInput';
+import Head from 'next/head';
 
 export default function DraftCreateLayout() {
 
@@ -83,18 +84,19 @@ export default function DraftCreateLayout() {
     return (
         <main className="flex flex-row min-h-screen w-full bg-blue-50">
             <Sidebar />
-            <div className="flex flex-col w-4/5 p-20">
+            <div className="flex flex-col w-4/5 p-16">
 
                 <h1 className="font-heading place-self-start text-5xl font-bold pb-8 text-black">Buat Draf Berita</h1>
 
                 <div className='flex flex-col py-10 px-12 items-start self-stretch border-2 border-blue-400 rounded-md gap-5 bg-white'>
+
                     <div className='flex flex-col gap-5'>
                         <p className="font-body font-bold text-xl text-black">
                             Buat draf berita secara otomatis dengan bantuan AI!<br></br>
                             Cukup masukkan deskripsi berita yang ingin dibuat pada kolom berikut.</p>
                         <p className='font-body text-md text-black'>
                             Contoh deskripsi draf berita:<br></br>
-                            Gedung perkantoran tinggi di pusat kota dilanda kebakaran pada tanggal 15 Oktober pukul 20.30, dengan penyebab diduga akibat korsleting listrik. Respon dari pemadam kebakaran sangat cepat dalam mencegah korban jiwa.
+                            Gedung perkantoran tinggi di Jakarta Pusat dilanda kebakaran pada tanggal 15 Oktober pukul 20.30, dengan penyebab diduga akibat korsleting listrik. Respon dari pemadam kebakaran sangat cepat dalam mencegah korban jiwa.
                         </p>
                     </div>
 
@@ -119,18 +121,25 @@ export default function DraftCreateLayout() {
                                 </svg>
                                 Sistem sedang Generate Berita...
                             </button>
-                            : (isDoneGenerate ?
-                                <div className='flex flex-row items-center gap-2'>
+                            : (isDoneGenerate
+                                ? <>
+                                    <Head>
+                                        <title>Buat Ulang Draf Berita</title>
+                                    </Head>
                                     <button type='button'
                                         className='font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400'
                                         onClick={handleMuatUlang}>Buat Ulang Draf Berita</button>
-                                </div>
-
-                                : <button
-                                    className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
-                                    onClick={handleGenerateBerita}>Buat Draf Berita</button>)
+                                </>
+                                : <>
+                                    <Head>
+                                        <title>Buat Draf Berita</title>
+                                    </Head>
+                                    <button
+                                        className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
+                                        onClick={handleGenerateBerita}>Buat Draf Berita</button>
+                                </>
+                            )
                         }
-                        {/* {isDoneGenerate ? (<DraftViewAfterCreateLayout title={draft.title} content={draft.content} />) : <p></p>} */}
 
                     </div>
 

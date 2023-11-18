@@ -30,7 +30,7 @@ export default function LoginLayout() {
                 username, password,
                 onSuccess: () => {
                     setIsLoading(false);
-                    router.push("/overview");
+                    router.push("/draf");
                 },
                 onError: () => {
                     setIsLoading(false);
@@ -41,7 +41,7 @@ export default function LoginLayout() {
                 email, password,
                 onSuccess: () => {
                     setIsLoading(false);
-                    router.push("/overview");
+                    router.push("/draf");
                 },
                 onError: () => {
                     setIsLoading(false);

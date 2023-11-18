@@ -44,11 +44,12 @@ function setSaveDraftActionCreator({ draft_detail }) {
     }
 }
 
-function getDraftDetailById({ id }) {
+function getDraftDetailById({ id, onSuccess }) {
     return async (dispatch) => {
         try {
             const draft_detail = await api.getDraftById({ id });
             dispatch(setGetDraftActionCreator({ draft_detail }));
+            onSuccess();
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,

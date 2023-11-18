@@ -7,6 +7,7 @@ import useRequireAuth from '@/hooks/useRequireAuth';
 import SidebarDraf from '@/components/Sidebar/SidebarDraf';
 import { getCommentByVersionId } from '@/states/comment/action';
 import useInput from '@/hooks/useInput';
+import Head from 'next/head';
 
 export default function EditDrafBeritaById() {
 
@@ -55,6 +56,9 @@ export default function EditDrafBeritaById() {
 
   return (
     <main className='flex flex-row items-start min-h-screen w-full'>
+      <Head>
+        <title>Ubah Draf: {draft_detail.title}</title>
+      </Head>
       <DraftEditLayout
         draft_detail={draft_detail}
       // editedContent={editedContent}

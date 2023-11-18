@@ -16,7 +16,7 @@ export default function Home() {
     }, [dispatch]);
 
     if (auth) {
-        router.push("/overview");
+        router.push("/draf");
     }
 
     const handleRegister = async () => {

@@ -2,10 +2,11 @@ import store from '@/states'
 import '@/styles/globals.css'
 
 import { Poppins, Roboto } from 'next/font/google'
+import Head from 'next/head'
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
- 
+
 const poppins = Poppins({
   subsets: ['latin'],
   weight: '700',
@@ -19,14 +20,17 @@ const roboto = Roboto({
 })
 
 export default function App({ Component, pageProps }) {
-  return ( 
-  <>
-    <ToastContainer />
-    <main className={`${poppins.variable} font-heading ${roboto.variable} font-body`}>    
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
-    </main>
-  </>
+  return (
+    <>
+      <Head>
+        <title>AINGS - Wartawan</title>
+      </Head>
+      <ToastContainer />
+      <main className={`${poppins.variable} font-heading ${roboto.variable} font-body`}>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </main>
+    </>
   )
 }

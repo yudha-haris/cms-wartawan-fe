@@ -23,7 +23,7 @@ export default function DraftListLayout() {
       "page": page, "limit": 6,
       onSuccess: (value) => {
         setTotalPage(value.total_pages);
-        setIsLoading(false)
+        setIsLoading(false);
       },
     }));
   }, [dispatch, page]);
@@ -65,27 +65,32 @@ export default function DraftListLayout() {
               ? <div className='flex flex-1 flex-col items-center self-stretch overflow-y-auto p-10'>
                 <ReactLoading type={"spin"} color={"blue"} height={'10%'} width={'10%'} />
               </div>
-              : <div className='flex flex-col items-start self-stretch overflow-y-auto'>
-                {(draft_list.draft_berita).map((draft) => (
-                  <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
-                    onClick={() => handleViewDraf(draft.draft_id)} />
-                ))}
-              </div>
+              : (
+                ((draft_list.draft_berita).length === 0)
+                  ? <div className='flex flex-col items-start self-stretch overflow-y-auto'>
+                    <p className='font-body text-lg py-10 px-8 italic text-black self-center'>Belum ada berita.</p>
+                  </div>
+                  : <>
+                    <div className='flex flex-col items-start self-stretch overflow-y-auto'>
+                      {(draft_list.draft_berita).map((draft) => (
+                        <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
+                          onClick={() => handleViewDraf(draft.draft_id)} />
+                      ))}
+                    </div>
+                    <div className='flex flex-row py-5 gap-5 items-center self-stretch justify-center border-t-2 border-gray-200'>
+                      <p className={(page === 1)
+                        ? 'font-body font-bold'
+                        : 'font-body font-bold text-black hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
+                        onClick={handlePrevPage}>Sebelumnya</p>
+                      <p className='font-body font-bold'>
+                        <span className='text-blue-600'>{page}</span>/{totalPage}</p>
+                      <p className={(page === totalPage)
+                        ? 'font-body font-bold'
+                        : 'font-body font-bold text-black hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
+                        onClick={handleNextPage}>Berikutnya</p>
+                    </div>
+                  </>)
           }
-
-
-          <div className='flex flex-row py-5 gap-5 items-center self-stretch justify-center border-t-2 border-gray-200'>
-            <p className={(page === 1)
-              ? 'font-body font-bold'
-              : 'font-body font-bold text-black hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
-              onClick={handlePrevPage}>Sebelumnya</p>
-            <p className='font-body font-bold'>
-              <span className='text-blue-600'>{page}</span>/{totalPage}</p>
-            <p className={(page === totalPage)
-              ? 'font-body font-bold'
-              : 'font-body font-bold text-black hover:cursor-pointer hover:text-blue-500 hover:underline hover:decoration-blue-500'}
-              onClick={handleNextPage}>Berikutnya</p>
-          </div>
 
         </div>
       </div>
