@@ -48,18 +48,6 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
 
             <div className="flex flex-col items-center self-stretch gap-2 px-4 h-fit overflow-y-auto">
                 {
-                    // contents
-                    //     ? contents.map((comment) => (
-                    //         < CardKomentar
-                    //             key={comment.id}
-                    //             author={(comment.user_wartawan)
-                    //                 ? (comment.user_wartawan.username)
-                    //                 : (comment.user_redaktur.username)}
-                    //             time={DatetimeConverter({ datetime: comment.created_at })}
-                    //             comment={comment.content} />
-                    //     ))
-                    //     : <p className="font-body text-xl text-black py-2 px-4">Belum ada Komentar</p>
-
                     (contents.length === 0)
                         ? <p className="font-body font-bold text-xl text-black py-6 px-4">Belum ada Komentar</p>
                         : contents.map((comment) => (
@@ -68,10 +56,11 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
                                 author={(comment.user_wartawan)
                                     ? (comment.user_wartawan.username)
                                     : (comment.user_redaktur.username)}
+                                isUser={(comment.user_wartawan) ? true : false}
                                 time={DatetimeConverter({ datetime: comment.created_at })}
-                                comment={comment.content} />
+                                comment={comment.content}
+                            />
                         ))
-
                 }
             </div>
 

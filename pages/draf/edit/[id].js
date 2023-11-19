@@ -59,16 +59,15 @@ export default function EditDrafBeritaById() {
       <Head>
         <title>Ubah Draf: {draft_detail.title}</title>
       </Head>
-      <DraftEditLayout
-        draft_detail={draft_detail}
-      // editedContent={editedContent}
-      // handleEditedContentChange={handleEditedContentChange} 
-      />
-      {/* <SidebarDraf
-        draft_detail={draft_detail}
-        comments={comments}
-        isEditing={true}
-        editedContent={editedContent} /> */}
+      <DraftEditLayout draft_detail={draft_detail} />
+      {
+        ((draft_detail.status).toLowerCase() === "reviewed")
+        && <SidebarDraf
+          draft_detail={draft_detail}
+          comments={comments}
+          isEditing={true}
+          editedContent={editedContent} />
+      }
     </main>
   );
 }

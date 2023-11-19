@@ -4,7 +4,7 @@ import { editDraft } from "@/states/draft/action";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function DraftEditLayout({ draft_detail, editedContent, handleEditedContentChange }) {
+export default function DraftEditLayout({ draft_detail }) {
 
     const router = useRouter();
     const dispatch = useDispatch();
@@ -19,12 +19,12 @@ export default function DraftEditLayout({ draft_detail, editedContent, handleEdi
         router.push(`/draf/${draft_detail.draft_id}`);
     };
 
-    const handleconsolelog = () => {
-        console.log("ini kepencet");
-    }
-
     return (
-        <div className="flex flex-col items-start self-stretch py-10 px-20 gap-8 min-h-screen w-full bg-blue-50">
+        <div className={
+            ((draft_detail.status).toLowerCase() === "reviewed")
+                ? "flex flex-col items-start self-stretch py-10 px-20 gap-8 min-h-screen w-3/4 bg-blue-50"
+                : "flex flex-col items-start self-stretch py-10 px-20 gap-8 min-h-screen w-full bg-blue-50"
+        }>
             <div className="flex flex-col items-start gap-3 self-stretch">
                 <div className="flex flex-1 flex-row items-start gap-2 self-stretch">
                     <button
@@ -32,7 +32,7 @@ export default function DraftEditLayout({ draft_detail, editedContent, handleEdi
                         className="flex font-body py-1 px-4 border-2 text-blue-600 border-blue-600 rounded-lg 
                                     hover:bg-blue-400 hover:text-white">Kembali
                     </button>
-                    <p className="flex flex-1 font-body text-black py-1 justify-center self-center bg-blue-200">Mengubah Draf Berita</p>
+                    <p className="flex flex-1 font-body text-black py-1 justify-center self-center bg-blue-200">Ubah Draf Berita</p>
                 </div>
             </div>
             <h1 className="font-heading text-2xl font-bold text-black border-b-1 border-black">{draft_detail.title}</h1>

@@ -77,13 +77,25 @@ export default function SidebarDetailDraf({ draft_detail, isEditing, editedConte
             }
 
             {((draft_detail.status).toLowerCase() === "reviewed")
-                && (<button
-                    onClick={() => handleApproveDraf()}
-                    className="flex flex-1 self-stretch items-center justify-center font-body font-bold text-white
-                        text-md py-2 px-5 bg-blue-600 rounded-lg hover:bg-blue-400">
-                    Beri persetujuan untuk publikasi
-                </button>)
-            }
+                && (<div className="flex flex-1 flex-col gap-3 items-start self-stretch">
+                    <div className="flex flex-1 flex-row gap-3 justify-center items-start self-stretch">
+                        <button onClick={() => router.push(`/draf/edit/${draft_detail.draft_id}`)}
+                            className="flex flex-1 self-stretch items-center justify-center font-body font-bold text-white
+                                text-md py-2 px-5 bg-blue-600 rounded-lg hover:bg-blue-400">
+                            Ubah Draf
+                        </button>
+                        <button onClick={() => handleSaveDraf()}
+                            className="flex flex-none self-stretch items-center justify-center font-body font-bold text-white
+                                text-md py-2 px-8 bg-blue-600 rounded-lg hover:bg-blue-400">
+                            Kirim Redaktur
+                        </button>
+                    </div>
+                    <button onClick={() => handleApproveDraf()}
+                        className="flex flex-1 self-stretch items-center justify-center font-body font-bold text-white
+                        text-md py-2 px-5 bg-green-500 rounded-lg hover:bg-green-400"
+                    >Beri persetujuan untuk publikasi
+                    </button>
+                </div>)}
 
         </div>
     );

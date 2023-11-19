@@ -4,7 +4,7 @@ export default function StatusConverter({ status }) {
         "draft": "Draf",
         "new": "Dikirim ke Redaktur",
         "reviewing": "Sedang disunting Redaktur",
-        "reviewed": "Sudah di-review Redaktur",
+        "reviewed": "Dikembalikan oleh Redaktur",
         "approved": "Disetujui",
         "rejected": "Ditolak",
         "published": "Dipublikasikan",
