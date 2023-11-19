@@ -94,6 +94,9 @@ function logout() {
     return async (dispatch) => {
         dispatch(setLogoutActionCreator());
         api.putAccessToken("");
+        toast.success("Berhasil Keluar", {
+            position: toast.POSITION.TOP_CENTER,
+        });
     }
 }
 
