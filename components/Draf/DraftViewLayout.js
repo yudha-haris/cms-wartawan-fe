@@ -46,25 +46,6 @@ export default function DraftViewLayout({ draft_detail }) {
                 ))}
 
             </div>
-            {/* <div className='flex flex-col py-4 px-10 items-start self-stretch
-                            bg-white border-2 border-blue-400 rounded-md'>
-                <p className='font-body text-md self-stretch'>Dibuat Oleh:</p>
-                <p className='font-body text-md self-stretch'>Disupervisi Oleh:</p>
-            </div> */}
-            {/* <div className='flex flex-row self-stretch justify-between'>
-                <button
-                    onClick={() => router.push(`/draf`)}
-                    className="font-body self-stretch py-2 px-4 border-2 text-blue-600 border-blue-600 rounded-lg hover:bg-blue-400 hover:text-white">
-                    Kembali
-                </button>
-                <div className='flex flex-row gap-3'>
-                    <button
-                        onClick={() => router.push(`/draf/edit/${draft_detail.draft_id}`)}
-                        className='font-body self-stretch py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400'>
-                        Edit Draf Berita
-                    </button>
-                </div>
-            </div> */}
         </div>
     );
 }

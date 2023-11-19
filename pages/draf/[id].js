@@ -31,7 +31,9 @@ export default function ViewDrafBeritaById() {
     }
 
     if (draft_detail) {
-      dispatch(getCommentByVersionId({ versionId: draft_detail.id }));
+      dispatch(getCommentByVersionId({
+        versionId: draft_detail.id,
+      }));
     }
 
   }, [dispatch, id, draft_detail]);
