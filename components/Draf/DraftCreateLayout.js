@@ -22,7 +22,7 @@ export default function DraftCreateLayout() {
     const [isLoading, setIsLoading] = useState(false);
     const [isDoneGenerate, setIsDoneGenerate] = useState(false);
     const [isCreated, setIsCreated] = useState(false);
-    const PROMPT_PREPEND = "Buatkan berita mengenai ";
+    const PROMPT_PREPEND = "Buatkan berita dengan deskripsi: ";
 
     useEffect(() => {
 
