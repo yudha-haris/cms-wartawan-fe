@@ -54,7 +54,7 @@ export default function LoginLayout() {
     return (
         <main className='flex justify-center items-center min-h-screen w-[640] bg-blue-50'>
 
-            <div className="flex flex-col items-center place-items-center p-20 gap-y-4 rounded-xl bg-white border-2 border-blue-400">
+            <form className="flex flex-col items-center place-items-center p-20 gap-y-4 rounded-xl bg-white border-2 border-blue-400">
 
                 <div className='flex flex-col place-items-center pb-4'>
                     <h1 className="font-heading place-self-center text-6xl font-bold text-black">AINGS</h1>
@@ -97,7 +97,7 @@ export default function LoginLayout() {
                             </svg>
                             Masuk...
                         </button>
-                        : <button className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
+                        : <button type='submit' className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
                             onClick={handleLogin}>Masuk</button>
                 }
 
@@ -107,7 +107,7 @@ export default function LoginLayout() {
                         <span className='text-blue-500 hover:underline hover:decoration-blue-500'>Daftarkan</span></Link>.
                 </p>
 
-            </div>
+            </form>
 
         </main>
     );

@@ -100,7 +100,7 @@ export default function DraftCreateLayout() {
                         </p>
                     </div>
 
-                    <div className="flex flex-col items-center self-stretch gap-3">
+                    <form className="flex flex-col items-center self-stretch gap-3">
                         <Textbox
                             id="prompt"
                             rows={4}
@@ -134,14 +134,14 @@ export default function DraftCreateLayout() {
                                     <Head>
                                         <title>Buat Draf Berita</title>
                                     </Head>
-                                    <button
+                                    <button type='submit'
                                         className="font-body py-2 px-5 text-white bg-blue-600 rounded-lg hover:bg-blue-400"
                                         onClick={handleGenerateBerita}>Buat Draf Berita</button>
                                 </>
                             )
                         }
 
-                    </div>
+                    </form>
 
                 </div>
 

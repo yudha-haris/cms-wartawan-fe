@@ -41,6 +41,7 @@ function register({ email, username, password, onSuccess, onError }) {
                 toast.error("Isi semua kolom yang dibutuhkan!", {
                     position: toast.POSITION.TOP_CENTER,
                 });
+                onError();
             } else {
                 const user = await api.register({ email, username, password });
                 dispatch(setRegisterActionCreator());
