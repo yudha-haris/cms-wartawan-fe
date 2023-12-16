@@ -1,6 +1,6 @@
 const api = (() => {
 
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   function putAccessToken(token) {
     localStorage.setItem("accessToken", token);

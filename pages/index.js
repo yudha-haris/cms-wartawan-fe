@@ -13,11 +13,18 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(asyncPreloadProcess());
-    }, [dispatch]);
+        if (auth) {
+            router.push("/draf");
+        } else {
+            router.push("/auth/login");
+        }
+    }, [dispatch, auth, router]);
 
-    if (auth) {
-        router.push("/draf");
-    }
+    // if (auth) {
+    //     router.push("/draf");
+    // } else {
+    //     router.push("/auth/login");
+    // }
 
     const handleRegister = async () => {
         router.push("/auth/register")
