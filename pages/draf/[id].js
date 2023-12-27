@@ -4,7 +4,7 @@ import DraftViewLayout from "@/components/Draf/DraftViewLayout";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDraftDetailById, getDraftDetailRedakturById } from '@/states/draft/action';
 import useRequireAuth from '@/hooks/useRequireAuth';
-import { getCommentByVersionId } from '@/states/comment/action';
+import { getCommentByDraftId, getCommentByVersionId } from '@/states/comment/action';
 import SidebarDraf from '@/components/Sidebar/SidebarDraf';
 import ReactLoading from 'react-loading';
 import Head from 'next/head';
@@ -31,8 +31,8 @@ export default function ViewDrafBeritaById() {
     }
 
     if (draft_detail) {
-      dispatch(getCommentByVersionId({
-        versionId: draft_detail.id,
+      dispatch(getCommentByDraftId({
+        draftId: draft_detail.draft_id,
       }));
     }
 
@@ -59,7 +59,10 @@ export default function ViewDrafBeritaById() {
               <title>Lihat Draft: {draft_detail.title}</title>
             </Head>
             <DraftViewLayout draft_detail={draft_detail} />
-            <SidebarDraf draft_detail={draft_detail} comments={comments} isEditing={false} />
+            <SidebarDraf
+              draft_detail={draft_detail}
+              comments={(comments ? comments.comments : [])}
+              isEditing={false} />
           </main>
       }
     </>

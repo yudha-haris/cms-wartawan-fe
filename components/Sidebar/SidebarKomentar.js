@@ -1,36 +1,32 @@
 import CardKomentar from "../Card/CardKomentar";
 import useInput from "@/hooks/useInput";
-import { createComment, getCommentByVersionId } from "@/states/comment/action";
+import { createComment, getCommentByDraftId, getCommentByVersionId } from "@/states/comment/action";
 import { useDispatch, useSelector } from "react-redux";
 import Textbox from "../Inputs/Textbox";
 import DatetimeConverter from "@/utils/datetimeConverter";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 
-export default function SidebarKomentar({ isAddable, version_id, contents }) {
+export default function SidebarKomentar({ isAddable, version_id, draft_id, contents }) {
 
     const [commentContent, handleCommentContentChange, setCommentContent] = useInput("");
     const [isLoading, setIsLoading] = useState(false);
-    const comments_fecthed = useSelector((state) => state.comments);
     const dispatch = useDispatch();
 
+    const commentsContainerRef = useRef();
+
     useEffect(() => {
-        if (version_id) {
-            dispatch(getCommentByVersionId({ versionId: version_id }));
+        // Scroll to the bottom of the comments container
+        if (commentsContainerRef.current) {
+            commentsContainerRef.current.scrollTop = commentsContainerRef.current.scrollHeight;
         }
-
-    }, [dispatch, version_id, setCommentContent]);
-
-    const CARD_PLACEHOLDER = {
-        author: "Nama Panjang",
-        version: "Versi 1",
-        comment: "Komentar lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet.",
-    }
+    }, [contents]); // Scroll when contents change
 
     const handleCreateComment = () => {
         setIsLoading(true);
         dispatch(createComment({
             versionId: version_id,
+            draftId: draft_id,
             content: commentContent,
             onSuccess: () => {
                 setCommentContent("");
@@ -46,7 +42,8 @@ export default function SidebarKomentar({ isAddable, version_id, contents }) {
     return (
         <div className="flex flex-col self-stretch items-center gap-5 h-fit overflow-y-auto">
 
-            <div className="flex flex-col items-center self-stretch gap-2 px-4 h-fit overflow-y-auto">
+            <div ref={commentsContainerRef}
+                className="flex flex-col items-center self-stretch gap-2 px-4 h-fit overflow-y-auto">
                 {
                     (contents.length === 0)
                         ? <p className="font-body font-bold text-xl text-black py-6 px-4">Belum ada Komentar</p>

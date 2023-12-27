@@ -35,6 +35,7 @@ export default function SidebarDraf({ draft_detail, comments, isEditing, editedC
                     ? <SidebarKomentar
                         isAddable={(isEditing ? false : true)}
                         version_id={draft_detail.id}
+                        draft_id={draft_detail.draft_id}
                         contents={comments} />
                     : <SidebarDetailDraf
                         draft_detail={draft_detail}

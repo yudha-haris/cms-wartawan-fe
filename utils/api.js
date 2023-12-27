@@ -232,6 +232,21 @@ const api = (() => {
 
   }
 
+  async function getCommentByDraftId({ draftId }) {
+    const response = await fetchWithAuth(
+      `${BASE_URL}/v1/comment/${draftId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+    const responseJson = await response.json();
+    return responseJson;
+
+  }
+
   async function createComment({ versionId, content }) {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/comment/${versionId}`,
@@ -263,6 +278,7 @@ const api = (() => {
     saveDraftToNew,
     saveDraftToApproved,
     getComment,
+    getCommentByDraftId,
     createComment,
   };
 })();

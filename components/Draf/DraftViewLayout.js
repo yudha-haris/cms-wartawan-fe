@@ -30,7 +30,7 @@ export default function DraftViewLayout({ draft_detail }) {
             <div className="flex flex-col items-start gap-3 self-stretch">
                 <div className="flex flex-1 flex-row items-start gap-2 self-stretch">
                     <button
-                        onClick={() => router.push(`/draf`)}
+                        onClick={() => router.back()}
                         className="flex font-body py-1 px-4 border-2 text-blue-600 border-blue-600 rounded-lg 
                                     hover:bg-blue-400 hover:text-white">Kembali
                     </button>
