@@ -3,7 +3,7 @@ import useRequireAuth from "@/hooks/useRequireAuth";
 import Head from "next/head";
 
 export default function DaftarDrafBerita() {
-    const auth = useRequireAuth();
+    // const auth = useRequireAuth();
     return (
         <>
             <Head>
