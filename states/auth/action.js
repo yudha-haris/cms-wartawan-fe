@@ -84,7 +84,7 @@ function login({ email, username, password, onSuccess, onError }) {
 
         } catch (error) {
             onError();
-            toast.error(error, {
+            toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             })
         }
