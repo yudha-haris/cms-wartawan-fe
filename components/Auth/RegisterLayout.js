@@ -40,7 +40,7 @@ export default function RegisterLayout() {
 
                 <div className='flex flex-col place-items-center pb-4'>
                     <h1 className="font-heading place-self-center text-6xl font-bold text-black">AINGS</h1>
-                    <p className='font-body text-lg place-self-center text-center text-black'>Artificial Intelligence News Generator System</p>
+                    <p className='font-body text-lg place-self-center text-center text-black'>Automatic Indonesian News Generation System</p>
                 </div>
 
                 <h1 className="font-heading place-self-center text-2xl font-bold pb-4 text-black">Daftarkan Akun</h1>

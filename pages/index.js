@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncPreloadProcess } from '@/states/preload/action';
 import OnboardingLayout from '@/components/Auth/OnboardingLayout';
+import { toast } from 'react-toastify';
 
 
 export default function Home() {
@@ -37,7 +38,7 @@ export default function Home() {
 
     return (
         <>
-            <OnboardingLayout handleRegister={handleRegister} handleLogin={handleLogin} />
+            {/* <OnboardingLayout handleRegister={handleRegister} handleLogin={handleLogin} /> */}
         </>
     );
 }

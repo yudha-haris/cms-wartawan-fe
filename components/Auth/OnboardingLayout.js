@@ -7,7 +7,7 @@ export default function OnboardingLayout({ handleRegister, handleLogin }) {
 
                 <div className='flex flex-col place-items-center pb-6'>
                     <h1 className="font-heading place-self-center text-6xl font-bold text-black">AINGS</h1>
-                    <p className='font-body text-lg place-self-center text-center text-black'>Artificial Intelligence News Generator System</p>
+                    <p className='font-body text-lg place-self-center text-center text-black'>Automatic Indonesian News Generation System</p>
                 </div>
 
                 <div className='flex flex-row gap-2 self-stretch'>
