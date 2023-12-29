@@ -28,6 +28,10 @@ export default function DraftListLayout() {
     }));
   }, [dispatch, page]);
 
+  const draft_list_shown = draft_list?.draft_berita
+    ? draft_list.draft_berita
+    : [];
+
   const handleViewDraf = (id) => {
     router.push(`/draf/${id}`)
   };
@@ -66,13 +70,13 @@ export default function DraftListLayout() {
                 <ReactLoading type={"spin"} color={"blue"} height={'10%'} width={'10%'} />
               </div>
               : (
-                ((draft_list.draft_berita).length === 0)
+                ((draft_list_shown).length === 0)
                   ? <div className='flex flex-col items-start self-stretch overflow-y-auto'>
                     <p className='font-body text-lg py-10 px-8 italic text-black self-center'>Belum ada berita.</p>
                   </div>
                   : <>
                     <div className='flex flex-col items-start self-stretch overflow-y-auto'>
-                      {(draft_list.draft_berita).map((draft) => (
+                      {(draft_list_shown).map((draft) => (
                         <ListItem key={draft.draft_id} title={draft.title} status={draft.status} time={draft.created_at}
                           onClick={() => handleViewDraf(draft.draft_id)} />
                       ))}

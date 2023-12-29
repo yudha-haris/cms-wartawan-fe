@@ -16,7 +16,7 @@ function setPreloadActionCreator(isPreload) {
 
 function asyncPreloadProcess() {
   return async (dispatch) => {
-    dispatch(setPreloadActionCreator(true));
+    // dispatch(setPreloadActionCreator(true));
     try {
       const token = api.getAccessToken();
       if (token) {

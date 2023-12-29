@@ -9,7 +9,7 @@ export default function useRequireAuth() {
 
     useEffect(() => {
         if (!auth) {
-            router.push("/");
+            router.push("/auth/login");
         }
     }, [auth, router]);
 

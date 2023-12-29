@@ -84,7 +84,7 @@ function login({ email, username, password, onSuccess, onError }) {
 
         } catch (error) {
             onError();
-            toast.error(error.message, {
+            toast.error("Data yang dimasukkan salah", {
                 position: toast.POSITION.TOP_CENTER,
             })
         }
