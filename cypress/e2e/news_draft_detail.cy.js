@@ -12,7 +12,7 @@ import {
   originalDesc,
 } from "../utils/news_draft_detail_test_util";
 
-describe("Generate News Spec", () => {
+describe("News Draft Detail Spec", () => {
   it("User can access News Draft Detail page", () => {
     cy.request({
       method: "POST",
