@@ -1,6 +1,5 @@
 const api = (() => {
-
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+  const BASE_URL = "https://ta-aings-399219.uc.r.appspot.com";
 
   function putAccessToken(token) {
     localStorage.setItem("accessToken", token);
@@ -42,11 +41,9 @@ const api = (() => {
     }
 
     return responseJson;
-
   }
 
   async function loginEmail({ email, password }) {
-
     const response = await fetch(`${BASE_URL}/auth/login/`, {
       method: "POST",
       headers: {
@@ -68,11 +65,9 @@ const api = (() => {
     }
 
     return token;
-
   }
 
   async function loginUsername({ username, password }) {
-
     const response = await fetch(`${BASE_URL}/auth/login/`, {
       method: "POST",
       headers: {
@@ -94,13 +89,9 @@ const api = (() => {
     }
 
     return token;
-
   }
 
-  async function getDraftList({
-    page = "1",
-    limit = "6",
-  } = {}) {
+  async function getDraftList({ page = "1", limit = "6" } = {}) {
     const response = await fetchWithAuth(
       `${BASE_URL}/v1/draft?page=${page}&limit=${limit}`,
       {
@@ -108,44 +99,38 @@ const api = (() => {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      }
+    );
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function getDraftById({ id }) {
-    const response = await fetchWithAuth(
-      `${BASE_URL}/v1/draft/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    const response = await fetchWithAuth(`${BASE_URL}/v1/draft/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function createDraft({ prompt }) {
-    const response = await fetchWithAuth(
-      `${BASE_URL}/v1/draft`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt,
-        }),
-      });
+    const response = await fetchWithAuth(`${BASE_URL}/v1/draft`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt,
+      }),
+    });
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function recreateDraft({ id, prompt }) {
@@ -159,62 +144,53 @@ const api = (() => {
         body: JSON.stringify({
           prompt,
         }),
-      });
+      }
+    );
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function editDraft({ id, content }) {
-    const response = await fetchWithAuth(
-      `${BASE_URL}/v1/draft/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content,
-        }),
-      });
+    const response = await fetchWithAuth(`${BASE_URL}/v1/draft/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content,
+      }),
+    });
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function saveDraftToNew({ id, content }) {
-    const response = await fetchWithAuth(
-      `${BASE_URL}/v1/draft/save/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content,
-        }),
-      });
+    const response = await fetchWithAuth(`${BASE_URL}/v1/draft/save/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content,
+      }),
+    });
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function saveDraftToApproved({ id }) {
-    const response = await fetchWithAuth(
-      `${BASE_URL}/v1/draft/approve/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    const response = await fetchWithAuth(`${BASE_URL}/v1/draft/approve/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function getComment({ versionId }) {
@@ -225,26 +201,23 @@ const api = (() => {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      }
+    );
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function getCommentByDraftId({ draftId }) {
-    const response = await fetchWithAuth(
-      `${BASE_URL}/v1/comment/${draftId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    const response = await fetchWithAuth(`${BASE_URL}/v1/comment/${draftId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const responseJson = await response.json();
     return responseJson;
-
   }
 
   async function createComment({ versionId, content }) {
@@ -258,7 +231,8 @@ const api = (() => {
         body: JSON.stringify({
           content,
         }),
-      });
+      }
+    );
 
     const responseJson = await response.json();
     return responseJson;
