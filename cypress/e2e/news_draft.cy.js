@@ -4,7 +4,7 @@
  *   - User can navigate through pages in News Draft page
  */
 
-describe("Authentication spec", () => {
+describe("News Draft spec", () => {
   beforeEach("Visit Page", () => {
     cy.visit("http://localhost:3000/auth/login?");
   });

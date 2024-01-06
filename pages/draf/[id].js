@@ -1,16 +1,21 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import DraftViewLayout from "@/components/Draf/DraftViewLayout";
-import { useDispatch, useSelector } from 'react-redux';
-import { getDraftDetailById, getDraftDetailRedakturById } from '@/states/draft/action';
-import useRequireAuth from '@/hooks/useRequireAuth';
-import { getCommentByDraftId, getCommentByVersionId } from '@/states/comment/action';
-import SidebarDraf from '@/components/Sidebar/SidebarDraf';
-import ReactLoading from 'react-loading';
-import Head from 'next/head';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getDraftDetailById,
+  getDraftDetailRedakturById,
+} from "@/states/draft/action";
+import useRequireAuth from "@/hooks/useRequireAuth";
+import {
+  getCommentByDraftId,
+  getCommentByVersionId,
+} from "@/states/comment/action";
+import SidebarDraf from "@/components/Sidebar/SidebarDraf";
+import ReactLoading from "react-loading";
+import Head from "next/head";
 
 export default function ViewDrafBeritaById() {
-
   const router = useRouter();
   const { id } = router.query;
 
@@ -22,50 +27,59 @@ export default function ViewDrafBeritaById() {
 
   useEffect(() => {
     if (id) {
-      dispatch(getDraftDetailById({
-        id,
-        onSuccess: () => {
-          setIsLoading(false);
-        }
-      }));
+      dispatch(
+        getDraftDetailById({
+          id,
+          onSuccess: () => {
+            setIsLoading(false);
+          },
+        })
+      );
     }
 
     if (draft_detail) {
-      dispatch(getCommentByDraftId({
-        draftId: draft_detail.draft_id,
-      }));
+      dispatch(
+        getCommentByDraftId({
+          draftId: draft_detail.draft_id,
+        })
+      );
     }
-
   }, [dispatch, id, draft_detail]);
 
   if (!draft_detail) {
-    return (<div></div>);
+    return <div />;
   }
 
   return (
     <>
-      {
-        isLoading
-          ? <>
-            <Head>
-              <title>Lihat Draft</title>
-            </Head>
-            <div className='flex flex-col bg-blue-50 min-h-screen items-center justify-center'>
-              <ReactLoading type={"spin"} color={"blue"} height={'10%'} width={'10%'} />
-            </div>
-          </>
-          : <main className='flex flex-row items-start max-h-screen w-full'>
-            <Head>
-              <title>Lihat Draft: {draft_detail.title}</title>
-            </Head>
-            <DraftViewLayout draft_detail={draft_detail} />
-            <SidebarDraf
-              draft_detail={draft_detail}
-              comments={(comments ? comments.comments : [])}
-              isEditing={false} />
-          </main>
-      }
+      {isLoading && (
+        <>
+          <Head>
+            <title>Lihat Draft</title>
+          </Head>
+          <div className="flex flex-col bg-blue-50 min-h-screen items-center justify-center">
+            <ReactLoading
+              type={"spin"}
+              color={"blue"}
+              height={"10%"}
+              width={"10%"}
+            />
+          </div>
+        </>
+      )}
+      {!isLoading && (
+        <main className="flex flex-row items-start max-h-screen w-full">
+          <Head>
+            <title>Lihat Draft: {draft_detail.title}</title>
+          </Head>
+          <DraftViewLayout draft_detail={draft_detail} />
+          <SidebarDraf
+            draft_detail={draft_detail}
+            comments={comments ? comments.comments : []}
+            isEditing={false}
+          />
+        </main>
+      )}
     </>
   );
-
 }

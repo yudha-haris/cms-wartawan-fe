@@ -1,5 +1,5 @@
 const api = (() => {
-  const BASE_URL = "https://ta-aings-399219.uc.r.appspot.com";
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   function putAccessToken(token) {
     localStorage.setItem("accessToken", token);
@@ -114,8 +114,7 @@ const api = (() => {
       },
     });
 
-    const responseJson = await response.json();
-    return responseJson;
+    return await response.json();
   }
 
   async function createDraft({ prompt }) {
@@ -129,8 +128,7 @@ const api = (() => {
       }),
     });
 
-    const responseJson = await response.json();
-    return responseJson;
+    return await response.json();
   }
 
   async function recreateDraft({ id, prompt }) {
