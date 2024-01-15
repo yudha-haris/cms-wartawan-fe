@@ -22,6 +22,7 @@ export default function DraftCreateLayout() {
     const [isLoading, setIsLoading] = useState(false);
     const [isDoneGenerate, setIsDoneGenerate] = useState(false);
     const [isCreated, setIsCreated] = useState(false);
+    const [selectedModel, setSelectedModel] = useState(1)
     const PROMPT_PREPEND = "Buatkan berita dengan deskripsi: ";
 
     useEffect(() => {
@@ -93,11 +94,22 @@ export default function DraftCreateLayout() {
                     <div className='flex flex-col gap-5'>
                         <p className="font-body font-bold text-xl text-black">
                             Buat draf berita secara otomatis dengan bantuan AI!<br></br>
-                            Cukup masukkan deskripsi berita yang ingin dibuat pada kolom berikut.</p>
+                            Cukup pilih model AI yang diinginkan dan masukkan deskripsi berita yang ingin dibuat.</p>
                         <p className='font-body text-md text-black'>
                             Contoh deskripsi draf berita:<br></br>
                             Gedung perkantoran tinggi di Jakarta Pusat dilanda kebakaran pada tanggal 15 Oktober pukul 20.30, dengan penyebab diduga akibat korsleting listrik. Respon dari pemadam kebakaran sangat cepat dalam mencegah korban jiwa.
                         </p>
+                    </div>
+
+                    <div className="flex flex-row self-stretch border-2 rounded-lg overflow-hidden">
+                        <div className="flex font-body text-md items-center bg-gray-100 px-5">Model</div>
+                        <select id="draft-save-options"
+                            value={selectedModel} onChange={(selected) => setSelectedModel(selected.target.value)}
+                            className="bg-gray-50 rounded-lg border-1 border-blue 300 font-body py-2 px-5
+                                text-gray-900 text-sm hover:border-blue-500 block w-full ">
+                            <option value={1}>OpenAI GPT 4.0</option>
+                            <option value={2}>Model B</option>
+                        </select>
                     </div>
 
                     <form className="flex flex-col items-center self-stretch gap-3">
