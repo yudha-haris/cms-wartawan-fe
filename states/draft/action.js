@@ -66,11 +66,13 @@ function createDraft({ prompt, onSuccess, onError }) {
             toast.success("Pembuatan draf berita berhasil!", {
                 position: toast.POSITION.TOP_CENTER,
             });
+            console.log(draft_detail);
             onSuccess(draft_detail);
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             });
+            console.log(error)
             onError();
         }
     }

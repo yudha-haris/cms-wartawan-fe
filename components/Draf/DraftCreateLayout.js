@@ -107,8 +107,7 @@ export default function DraftCreateLayout() {
                             value={selectedModel} onChange={(selected) => setSelectedModel(selected.target.value)}
                             className="bg-gray-50 rounded-lg border-1 border-blue 300 font-body py-2 px-5
                                 text-gray-900 text-sm hover:border-blue-500 block w-full ">
-                            <option value={1}>OpenAI GPT 4.0</option>
-                            <option value={2}>Model B</option>
+                            <option value={1}>OpenAI GPT 3.5 Turbo</option>
                         </select>
                     </div>
 
