@@ -101,12 +101,6 @@ export default function LoginLayout() {
                             onClick={handleLogin}>Masuk</button>
                 }
 
-
-                <p className='font-body text-black'>
-                    Belum punya akun? <Link href="/auth/register">
-                        <span className='text-blue-500 hover:underline hover:decoration-blue-500'>Daftarkan</span></Link>.
-                </p>
-
             </form>
 
         </main>
