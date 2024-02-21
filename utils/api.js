@@ -169,6 +169,15 @@ const api = (() => {
       });
 
     const responseJson = await response.json();
+
+    console.log(responseJson);
+
+    const { error } = responseJson;
+
+    if (error) {
+      throw new Error("Pembuatan berita gagal. Terdapat kesalahan pada sistem.");
+    }
+
     return responseJson;
 
   }

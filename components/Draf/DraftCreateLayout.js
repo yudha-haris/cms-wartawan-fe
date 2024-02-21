@@ -103,7 +103,7 @@ export default function DraftCreateLayout() {
 
                     <div className="flex flex-row self-stretch border-2 rounded-lg overflow-hidden">
                         <div className="flex font-body text-md items-center bg-gray-100 px-5">Model</div>
-                        <select id="draft-save-options"
+                        <select id="draft-save-options" disabled
                             value={selectedModel} onChange={(selected) => setSelectedModel(selected.target.value)}
                             className="bg-gray-50 rounded-lg border-1 border-blue 300 font-body py-2 px-5
                                 text-gray-900 text-sm hover:border-blue-500 block w-full ">
