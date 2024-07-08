@@ -9,14 +9,11 @@ export default function Sidebar() {
     const router = useRouter()
 
     return (
-        <div className="flex flex-col min-h-screen w-1/5 items-center py-24 px-8 bg-blue-900">
-            <div className="flex p-8" onClick={() => router.push('/draf')}>
+        <div className="flex md:flex-col flex-row md:min-h-screen md:w-1/4 w-full items-center md:py-24 py-4 px-8 bg-blue-900">
+            <div className="hidden md:flex p-8" onClick={() => router.push('/draf')}>
                 <h1 className="font-heading place-self-center text-4xl font-bold text-white hover:cursor-pointer">AINGS</h1>
             </div>
-            <div className="flex flex-col place-items-center self-stretch">
-                {/* <div className="self-stretch hover:bg-blue-950 hover:cursor-pointer" onClick={() => router.push('/overview')}>
-                    <p className="font-body text-lg py-2 px-3 self-stretch text-white ">Overview</p>
-                </div> */}
+            <div className="flex md:flex-col flex-row place-items-center self-stretch">
                 <div className="self-stretch hover:bg-blue-950 hover:cursor-pointer" onClick={() => router.push('/draf')}>
                     <p className="font-body text-lg py-2 px-3 self-stretch text-white">Daftar Draf Berita</p>
                 </div>

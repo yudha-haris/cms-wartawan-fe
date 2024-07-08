@@ -15,10 +15,13 @@ export default function ViewDrafBeritaById() {
   const { id } = router.query;
 
   const draft_detail = useSelector((state) => state.draft_detail);
-  const comments = useSelector((state) => state.comments);
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar)
+}
 
   useEffect(() => {
     if (id) {
@@ -30,13 +33,7 @@ export default function ViewDrafBeritaById() {
       }));
     }
 
-    if (draft_detail) {
-      dispatch(getCommentByDraftId({
-        draftId: draft_detail.draft_id,
-      }));
-    }
-
-  }, [dispatch, id, draft_detail]);
+  }, [dispatch, id]);
 
   if (!draft_detail) {
     return (<div></div>);
@@ -54,15 +51,16 @@ export default function ViewDrafBeritaById() {
               <ReactLoading type={"spin"} color={"blue"} height={'10%'} width={'10%'} />
             </div>
           </>
-          : <main className='flex flex-row items-start max-h-screen w-full'>
+          : <main className='flex max-h-screen w-full'>
             <Head>
               <title>Lihat Draft: {draft_detail.title}</title>
             </Head>
-            <DraftViewLayout draft_detail={draft_detail} />
+            <DraftViewLayout draft_detail={draft_detail} onToggleSidebar={toggleSidebar} />
             <SidebarDraf
               draft_detail={draft_detail}
-              comments={(comments ? comments.comments : [])}
-              isEditing={false} />
+              isEditing={false}
+              isShow={showSidebar}
+              onToggleSidebar={toggleSidebar} />
           </main>
       }
     </>
