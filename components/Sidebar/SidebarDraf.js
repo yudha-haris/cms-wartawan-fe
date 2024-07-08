@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SidebarKomentar from "./SidebarKomentar";
 import SidebarDetailDraf from "./SidebarDetailDraf";
+import { useDispatch, useSelector } from "react-redux";
+import { getCommentByDraftId } from "@/states/comment/action";
 
-export default function SidebarDraf({ draft_detail, comments, isEditing, editedContent }) {
-
+export default function SidebarDraf({ draft_detail, isEditing, editedContent }) {
+    const comments = useSelector((state) => state.comments);
     const [showComments, setShowComments] = useState(isEditing);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (draft_detail) {
+          dispatch(getCommentByDraftId({
+            draftId: draft_detail.draft_id,
+          }));
+        }
+    
+      }, [dispatch, draft_detail]);
 
     return (
         <div className={

@@ -15,7 +15,6 @@ export default function ViewDrafBeritaById() {
   const { id } = router.query;
 
   const draft_detail = useSelector((state) => state.draft_detail);
-  const comments = useSelector((state) => state.comments);
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -30,13 +29,7 @@ export default function ViewDrafBeritaById() {
       }));
     }
 
-    if (draft_detail) {
-      dispatch(getCommentByDraftId({
-        draftId: draft_detail.draft_id,
-      }));
-    }
-
-  }, [dispatch, id, draft_detail]);
+  }, [dispatch, id]);
 
   if (!draft_detail) {
     return (<div></div>);
@@ -61,7 +54,6 @@ export default function ViewDrafBeritaById() {
             <DraftViewLayout draft_detail={draft_detail} />
             <SidebarDraf
               draft_detail={draft_detail}
-              comments={(comments ? comments.comments : [])}
               isEditing={false} />
           </main>
       }
