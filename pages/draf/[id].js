@@ -18,7 +18,7 @@ export default function ViewDrafBeritaById() {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar)
 }
