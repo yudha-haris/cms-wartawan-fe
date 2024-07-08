@@ -18,6 +18,10 @@ export default function ViewDrafBeritaById() {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(true);
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar)
+}
 
   useEffect(() => {
     if (id) {
@@ -47,14 +51,16 @@ export default function ViewDrafBeritaById() {
               <ReactLoading type={"spin"} color={"blue"} height={'10%'} width={'10%'} />
             </div>
           </>
-          : <main className='flex flex-row items-start max-h-screen w-full'>
+          : <main className='flex max-h-screen w-full'>
             <Head>
               <title>Lihat Draft: {draft_detail.title}</title>
             </Head>
-            <DraftViewLayout draft_detail={draft_detail} />
+            <DraftViewLayout draft_detail={draft_detail} onToggleSidebar={toggleSidebar} />
             <SidebarDraf
               draft_detail={draft_detail}
-              isEditing={false} />
+              isEditing={false}
+              isShow={showSidebar}
+              onToggleSidebar={toggleSidebar} />
           </main>
       }
     </>
